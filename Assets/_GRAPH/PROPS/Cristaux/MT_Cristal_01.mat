@@ -10,13 +10,13 @@ Material:
   m_Name: MT_Cristal_01
   m_Shader: {fileID: -6465566751694194690, guid: f3bdf943f6d42bc4a95436e4dce58339,
     type: 3}
-  m_ValidKeywords:
+  m_ValidKeywords: []
+  m_InvalidKeywords:
   - _DISABLE_SSR_TRANSPARENT
-  m_InvalidKeywords: []
   m_LightmapFlags: 1
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: 2225
+  m_CustomRenderQueue: 2000
   stringTagMap:
     MotionVector: User
   disabledShaderPasses:
@@ -59,10 +59,10 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _EMMIntensity: 4.22
+    - _EMMIntensity: 3.59
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _FresnelIntensity: 5.55
+    - _FresnelIntensity: 6.43
     - _Metallic: 0.842
     - _OpacityBlend: 0
     - _OpaqueCullMode: 2
@@ -72,13 +72,13 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Smoothness: 0.68
+    - _Smoothness: 0.9
     - _SrcBlend: 1
     - _StencilRef: 0
-    - _StencilRefDepth: 8
+    - _StencilRefDepth: 0
     - _StencilRefDistortionVec: 4
-    - _StencilRefGBuffer: 10
-    - _StencilRefMV: 40
+    - _StencilRefGBuffer: 2
+    - _StencilRefMV: 32
     - _StencilWriteMask: 6
     - _StencilWriteMaskDepth: 8
     - _StencilWriteMaskDistortionVec: 4
@@ -86,8 +86,8 @@ Material:
     - _StencilWriteMaskMV: 40
     - _SupportDecals: 1
     - _SurfaceType: 0
-    - _TopForce: 2.1
-    - _TopLine: 0.635
+    - _TopForce: 1.92
+    - _TopLine: 0.69
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
@@ -104,11 +104,11 @@ Material:
     - _transparency: 1
     m_Colors:
     - _BaseColor: {r: 0, g: 0.9225074, b: 1.239479, a: 0}
-    - _BottomColor: {r: 0.45882353, g: 0.02745098, b: 0.7490196, a: 0}
+    - _BottomColor: {r: 0.056639347, g: 0.11763474, b: 0.8113208, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 0.6886792, g: 0.25130612, b: 0.06756851, a: 0}
+    - _TopColor: {r: 0.072783865, g: 0.8127673, b: 0.8207547, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6167801748283176399
 MonoBehaviour:
