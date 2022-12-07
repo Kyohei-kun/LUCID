@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -14,6 +15,9 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
+        [SerializeField] private TextMeshProUGUI debugVelocity;
+
+        [Space(50)]
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -269,9 +273,9 @@ namespace StarterAssets
 
             // move the player
             Vector3 thirdPersonMoveCalculated = targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime;
-            //thirdPersonMoveCalculated += (GameObject.FindGameObjectWithTag("Island").GetComponent<Rigidbody>().angularVelocity * Vector3.ProjectOnPlane((this.transform.position - GameObject.FindGameObjectWithTag("Island").transform.position), Vector3.up).magnitude);
-            _controller.Move(thirdPersonMoveCalculated + Vector3.forward * 0.00f);
+            _controller.Move(thirdPersonMoveCalculated);
 
+            
             // update animator if using character
             if (_hasAnimator)
             {

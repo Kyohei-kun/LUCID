@@ -11,8 +11,18 @@ public class CS_Island : MonoBehaviour
     Rigidbody _rigidbody;
 
     float rightLeft;
+    float forwardBackward;
+    float upDown;
+
     float currentAngleDirection;
+    float currentBoost;
+    float currentAltitude;
+
+    float targetAltitude;
+
     [SerializeField] private float speedRotation;
+    [SerializeField] private float speedBoost;
+    [SerializeField] private float speedAltitude;
 
     [Space(10)]
     [SerializeField] TextMeshProUGUI UI_angleRot;
@@ -21,12 +31,13 @@ public class CS_Island : MonoBehaviour
     {
         CS_InputManager.Initialisation();
         _rigidbody = GetComponent<Rigidbody>();
-
         player = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
     {
+        currentAltitude = transform.position.y;
+
         if (Input.GetKeyDown(KeyCode.KeypadPlus))
         {
             CS_InputManager.ChangePiloted(PlayerPilote.Island);
@@ -48,10 +59,29 @@ public class CS_Island : MonoBehaviour
         }
         currentAngleDirection = Mathf.Clamp(currentAngleDirection, -1f, 1f);
 
-        //_rigidbody.rotation = _rigidbody.rotation * Quaternion.Euler(new Vector3(0, currentAngleDirection * Time.deltaTime * speedRotation, 0));
+        if (forwardBackward > 0.5f)
+        {
+            currentBoost += 0.01f;
+        }
+        else if (forwardBackward < -0.5f)
+        {
+            currentBoost -= 0.01f;
+        }
 
-        _rigidbody.angularVelocity = Vector3.up * currentAngleDirection /2;
-        //player.GetComponent<CharacterController>().SimpleMove(_rigidbody.angularVelocity * Vector3.ProjectOnPlane((player.transform.position - gameObject.transform.position), Vector3.up).magnitude);
+        currentBoost = Mathf.Clamp(currentBoost, -1, 1);
+
+        transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedRotation);
+        transform.position = _rigidbody.position - transform.forward * currentBoost * Time.deltaTime * speedBoost;
+
+        float deltaAltitude = targetAltitude - currentAltitude;
+        if (deltaAltitude > 10)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * speedAltitude, transform.position.z);
+        }
+        else if(deltaAltitude < -10)
+        {
+            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * -speedAltitude, transform.position.z);
+        }
 
         UI_Debug();
     }
@@ -65,5 +95,12 @@ public class CS_Island : MonoBehaviour
     {
         Vector2 vector = value.ReadValue<Vector2>();
         rightLeft = vector.x;
+        forwardBackward = vector.y;
+    }
+
+    public void Altitude(CallbackContext value)
+    {
+        upDown = value.ReadValue<Vector2>().y;
+        targetAltitude += upDown / 20;
     }
 }

@@ -238,7 +238,7 @@
                     "name": "Altitude",
                     "type": "Value",
                     "id": "8346ea97-2d86-4509-9f40-1ad18ad78b79",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -279,7 +279,7 @@
                 {
                     "name": "",
                     "id": "0b739426-c8bf-4135-a3b5-4bd027a9e0d5",
-                    "path": "<Mouse>/scroll/x",
+                    "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
                     "groups": "KeyboardMouse",
