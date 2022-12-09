@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-static public class CS_InputManager 
+static public class CS_PilotManager 
 {
     static public PlayerPilote playerPilote;
     static public GameObject player;

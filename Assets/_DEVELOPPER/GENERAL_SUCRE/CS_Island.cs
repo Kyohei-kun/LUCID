@@ -1,21 +1,33 @@
+using StarterAssets;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Cinemachine;
 using static UnityEngine.InputSystem.InputAction;
 
 public class CS_Island : MonoBehaviour
 {
     GameObject player;
+    ThirdPersonController thirdPersonController;
+    PlayerInput playerInput;
     Rigidbody _rigidbody;
+    private bool isDriving = false;
+
+    Vector2 initRotation;
+    float decalCinemachineTargetPitch = 0;
+    float decalCinemachineTargetYaw = 0;
 
     float rightLeft;
     float forwardBackward;
     float upDown;
 
     float currentAngleDirection;
+    float lastAngleDirection;
+
     float currentBoost;
+    float lastBoost;
     float currentAltitude;
 
     float targetAltitude;
@@ -24,30 +36,40 @@ public class CS_Island : MonoBehaviour
     [SerializeField] private float speedBoost;
     [SerializeField] private float speedAltitude;
 
+    [Space(5)]
+    [SerializeField] private GameObject CM_Camera;
+    [SerializeField] private float thresholdLookCamera;
+
     [Space(10)]
     [SerializeField] TextMeshProUGUI UI_angleRot;
 
+    [SerializeField] CinemachineBrain CM_Brain;
+
+    public bool IsDriving { get => isDriving; set => isDriving = value; }
+    
     private void Start()
     {
-        CS_InputManager.Initialisation();
+        CS_PilotManager.Initialisation();
         _rigidbody = GetComponent<Rigidbody>();
         player = GameObject.FindGameObjectWithTag("Player");
+        thirdPersonController = player.GetComponent<ThirdPersonController>();
+        playerInput = GetComponent<PlayerInput>();
+        initRotation = new Vector2(CM_Camera.transform.localRotation.eulerAngles.x, CM_Camera.transform.localRotation.eulerAngles.y);
     }
 
     private void Update()
     {
-        currentAltitude = transform.position.y;
+        if (rightLeft == 0 && Mathf.Abs(currentAngleDirection) < 0.2f && currentAngleDirection == lastAngleDirection)
+        {
+            currentAngleDirection = 0;
+        }
 
-        if (Input.GetKeyDown(KeyCode.KeypadPlus))
+        if (forwardBackward == 0 && Mathf.Abs(currentBoost) < 0.2f && currentBoost == lastBoost)
         {
-            CS_InputManager.ChangePiloted(PlayerPilote.Island);
-            Debug.Log("Pilote Island");
+            currentBoost = 0;
         }
-        else if (Input.GetKeyDown(KeyCode.KeypadEnter))
-        {
-            CS_InputManager.ChangePiloted(PlayerPilote.None);
-            Debug.Log("Pilote Player");
-        }
+
+        currentAltitude = transform.position.y;
 
         if (rightLeft > 0.5f)
         {
@@ -78,12 +100,15 @@ public class CS_Island : MonoBehaviour
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * speedAltitude, transform.position.z);
         }
-        else if(deltaAltitude < -10)
+        else if (deltaAltitude < -10)
         {
             transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * -speedAltitude, transform.position.z);
         }
 
         UI_Debug();
+
+        lastAngleDirection = currentAngleDirection;
+        lastBoost = currentBoost;
     }
 
     private void UI_Debug()
@@ -102,5 +127,33 @@ public class CS_Island : MonoBehaviour
     {
         upDown = value.ReadValue<Vector2>().y;
         targetAltitude += upDown / 20;
+    }
+
+    public void ResetDecalLook()
+    {
+        decalCinemachineTargetYaw = 0;
+        decalCinemachineTargetPitch = 0;
+    }
+
+    public void Look(CallbackContext value)
+    {
+        if (CM_Brain.IsBlending == false && isDriving)
+        {
+            Vector2 direction = value.ReadValue<Vector2>();
+
+            float deltaTimeMultiplier = playerInput.currentControlScheme == "KeyboardMouse" ? 1.0f : Time.deltaTime;
+
+            // if there is an input and camera position is not fixed
+            if (direction.sqrMagnitude >= thresholdLookCamera)
+            {
+                decalCinemachineTargetPitch += direction.y * deltaTimeMultiplier;
+                decalCinemachineTargetYaw += direction.x * deltaTimeMultiplier;
+            }
+            
+            decalCinemachineTargetPitch = Mathf.Clamp(decalCinemachineTargetPitch, -50, 20);
+            decalCinemachineTargetYaw = Mathf.Clamp(decalCinemachineTargetYaw, -90, 90);
+
+            CM_Camera.transform.localRotation = Quaternion.Euler(initRotation.x + decalCinemachineTargetPitch, initRotation.y + decalCinemachineTargetYaw, 0.0f);
+        }
     }
 }

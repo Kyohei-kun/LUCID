@@ -15,9 +15,11 @@ namespace StarterAssets
 #endif
     public class ThirdPersonController : MonoBehaviour
     {
-        [SerializeField] private TextMeshProUGUI debugVelocity;
+        [SerializeField] private CS_UIManager UI_Manager;
+        [SerializeField] CS_Island island;
 
-        [Space(50)]
+        private I_Interact currentTrigger;
+
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
@@ -114,7 +116,7 @@ namespace StarterAssets
 
         private bool _hasAnimator;
 
-        private bool IsCurrentDeviceMouse
+        public bool IsCurrentDeviceMouse
         {
             get
             {
@@ -139,7 +141,7 @@ namespace StarterAssets
         private void Start()
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
-            
+
             _hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
@@ -163,12 +165,28 @@ namespace StarterAssets
             JumpAndGravity();
             GroundedCheck();
             Move();
+
+            if(currentTrigger != null)
+            {
+                if(!currentTrigger.PlayerIsInTrigger())
+                {
+                    currentTrigger = null;
+                    UI_Manager.UnDrawInteractUI();
+                }
+            }
+
+            if(island.IsDriving)
+                GetComponent<CharacterController>().enabled = false;
+            else
+                GetComponent<CharacterController>().enabled = true;
         }
 
         private void LateUpdate()
         {
             CameraRotation();
         }
+
+        #region "CharacterController"
 
         private void AssignAnimationIDs()
         {
@@ -207,12 +225,11 @@ namespace StarterAssets
             }
 
             // clamp our rotations so our values are limited 360 degrees
-            _cinemachineTargetYaw = ClampAngle(_cinemachineTargetYaw, float.MinValue, float.MaxValue);
-            _cinemachineTargetPitch = ClampAngle(_cinemachineTargetPitch, BottomClamp, TopClamp);
+            _cinemachineTargetYaw = _cinemachineTargetYaw.ClampAngle(float.MinValue, float.MaxValue);
+            _cinemachineTargetPitch = _cinemachineTargetPitch.ClampAngle(BottomClamp, TopClamp);
 
             // Cinemachine will follow this target
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
-                _cinemachineTargetYaw, 0.0f);
+            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,_cinemachineTargetYaw, 0.0f);
         }
 
         private void Move()
@@ -275,7 +292,7 @@ namespace StarterAssets
             Vector3 thirdPersonMoveCalculated = targetDirection.normalized * (_speed * Time.deltaTime) + new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime;
             _controller.Move(thirdPersonMoveCalculated);
 
-            
+
             // update animator if using character
             if (_hasAnimator)
             {
@@ -353,13 +370,13 @@ namespace StarterAssets
             }
         }
 
-        private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
-        {
-            if (lfAngle < -360f) lfAngle += 360f;
-            if (lfAngle > 360f) lfAngle -= 360f;
-            return Mathf.Clamp(lfAngle, lfMin, lfMax);
-        }
-
+        //public static float ClampAngle(this float lfAngle, float lfMin, float lfMax)
+        //{
+        //    if (lfAngle < -360f) lfAngle += 360f;
+        //    if (lfAngle > 360f) lfAngle -= 360f;
+        //    return Mathf.Clamp(lfAngle, lfMin, lfMax);
+        //}
+       
         private void OnDrawGizmosSelected()
         {
             Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
@@ -391,6 +408,26 @@ namespace StarterAssets
             if (animationEvent.animatorClipInfo.weight > 0.5f)
             {
                 AudioSource.PlayClipAtPoint(LandingAudioClip, transform.TransformPoint(_controller.center), FootstepAudioVolume);
+            }
+        }
+
+        private void OnInteract(InputValue value)
+        {
+            if(currentTrigger != null)
+            {
+                currentTrigger.Interract();
+            }
+        }
+
+        #endregion
+
+        private void OnTriggerEnter(Collider other)
+        {
+            I_Interact trigger = other.GetComponent<I_Interact>();
+            if (trigger != null)
+            {
+                UI_Manager.DrawInteractUI(trigger.UI_Name);
+                currentTrigger = trigger;
             }
         }
     }
