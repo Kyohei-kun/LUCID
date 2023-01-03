@@ -7875,8 +7875,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4913407165842047571}
-  - component: {fileID: 4874395312311244950}
   - component: {fileID: 4874395312311244949}
+  - component: {fileID: 4874395312311244950}
   - component: {fileID: 4874395312311244948}
   m_Layer: 0
   m_Name: PR_MainIsland
@@ -7904,6 +7904,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4874395312311244949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720764928226203881}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98ccb1540d4a25c449078518d0db39d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speedCurve: {fileID: 0}
+  speedRotation: 10
+  speedBoost: 20
+  speedAltitude: 5
+  CM_Camera: {fileID: 1578054008}
+  thresholdLookCamera: 0.01
+  UI_angleRot: {fileID: 0}
+  CM_Brain: {fileID: 0}
 --- !u!54 &4874395312311244950
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7920,25 +7940,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
---- !u!114 &4874395312311244949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5720764928226203881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 98ccb1540d4a25c449078518d0db39d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speedRotation: 20
-  speedBoost: 20
-  speedAltitude: 15
-  CM_Camera: {fileID: 1578054008}
-  thresholdLookCamera: 0.01
-  UI_angleRot: {fileID: 0}
-  CM_Brain: {fileID: 0}
 --- !u!114 &4874395312311244948
 MonoBehaviour:
   m_ObjectHideFlags: 0

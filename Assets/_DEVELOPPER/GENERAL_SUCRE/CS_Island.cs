@@ -9,6 +9,15 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class CS_Island : MonoBehaviour
 {
+    //[Tooltip("X = Forward | Y = UP | Z = RightLeft")]
+    [SerializeField] AnimationCurve speedForwardCurve;
+    [SerializeField] AnimationCurve speedRotationCurve;
+    [SerializeField] AnimationCurve speedUpCurve;
+
+    float timerBeginRotation;
+    float timerBeginAltittude;
+    float timerBeginBoost;
+
     GameObject player;
     ThirdPersonController thirdPersonController;
     PlayerInput playerInput;
@@ -32,9 +41,9 @@ public class CS_Island : MonoBehaviour
 
     float targetAltitude;
 
-    [SerializeField] private float speedRotation;
-    [SerializeField] private float speedBoost;
-    [SerializeField] private float speedAltitude;
+    [SerializeField] private float speedMaxRotation;
+    [SerializeField] private float speedMaxBoost;
+    [SerializeField] private float speedMaxAltitude;
 
     [Space(5)]
     [SerializeField] private GameObject CM_Camera;
@@ -46,7 +55,7 @@ public class CS_Island : MonoBehaviour
     [SerializeField] CinemachineBrain CM_Brain;
 
     public bool IsDriving { get => isDriving; set => isDriving = value; }
-    
+
     private void Start()
     {
         CS_PilotManager.Initialisation();
@@ -62,6 +71,7 @@ public class CS_Island : MonoBehaviour
         if (rightLeft == 0 && Mathf.Abs(currentAngleDirection) < 0.2f && currentAngleDirection == lastAngleDirection)
         {
             currentAngleDirection = 0;
+
         }
 
         if (forwardBackward == 0 && Mathf.Abs(currentBoost) < 0.2f && currentBoost == lastBoost)
@@ -73,44 +83,49 @@ public class CS_Island : MonoBehaviour
 
         if (rightLeft > 0.5f)
         {
-            currentAngleDirection += 0.01f;
+            //currentAngleDirection += 0.01f;
+            currentAngleDirection += speedRotationCurve.Evaluate(timerBeginRotation);
         }
         else if (rightLeft < -0.5f)
         {
-            currentAngleDirection -= 0.01f;
+            currentAngleDirection -= speedRotationCurve.Evaluate(timerBeginRotation);
         }
         currentAngleDirection = Mathf.Clamp(currentAngleDirection, -1f, 1f);
 
         if (forwardBackward > 0.5f)
         {
-            currentBoost += 0.01f;
+            currentBoost += speedForwardCurve.Evaluate(timerBeginBoost);
         }
         else if (forwardBackward < -0.5f)
         {
-            currentBoost -= 0.01f;
+            currentBoost -= speedForwardCurve.Evaluate(timerBeginBoost);
         }
 
         currentBoost = Mathf.Clamp(currentBoost, -1, 1);
 
-        transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedRotation);
-        transform.Translate(-transform.forward * currentBoost * Time.deltaTime * speedBoost, Space.World);
-        
-        //Debug.DrawRay(transform.position, transform.forward * 100, Color.red, 0.5f);
+        transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedMaxRotation);
+        transform.Translate(-transform.forward * currentBoost * Time.deltaTime * speedMaxBoost, Space.World);
 
         float deltaAltitude = targetAltitude - currentAltitude;
         if (deltaAltitude > 10)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * speedAltitude, transform.position.z);
+            //transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * speedMaxAltitude, transform.position.z);
+            transform.Translate(Vector3.up * Time.deltaTime * speedMaxAltitude * speedUpCurve.Evaluate(timerBeginAltittude));
         }
         else if (deltaAltitude < -10)
         {
-            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * -speedAltitude, transform.position.z);
+//            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * -speedMaxAltitude, transform.position.z);
+            transform.Translate(-Vector3.up * Time.deltaTime * speedMaxAltitude * speedUpCurve.Evaluate(timerBeginAltittude));
         }
 
         UI_Debug();
 
         lastAngleDirection = currentAngleDirection;
         lastBoost = currentBoost;
+
+        timerBeginRotation += Time.deltaTime;
+        timerBeginAltittude += Time.deltaTime;
+        timerBeginBoost += Time.deltaTime;
     }
 
     private void UI_Debug()
@@ -123,12 +138,16 @@ public class CS_Island : MonoBehaviour
         Vector2 vector = value.ReadValue<Vector2>();
         rightLeft = vector.x;
         forwardBackward = vector.y;
+
+        timerBeginRotation = 0;
+        timerBeginBoost = 0;
     }
 
     public void Altitude(CallbackContext value)
     {
         upDown = value.ReadValue<Vector2>().y;
         targetAltitude += upDown / 20;
+        timerBeginAltittude = 0;
     }
 
     public void ResetDecalLook()
@@ -151,7 +170,7 @@ public class CS_Island : MonoBehaviour
                 decalCinemachineTargetPitch += direction.y * deltaTimeMultiplier;
                 decalCinemachineTargetYaw += direction.x * deltaTimeMultiplier;
             }
-            
+
             decalCinemachineTargetPitch = Mathf.Clamp(decalCinemachineTargetPitch, -50, 20);
             decalCinemachineTargetYaw = Mathf.Clamp(decalCinemachineTargetYaw, -90, 90);
 
