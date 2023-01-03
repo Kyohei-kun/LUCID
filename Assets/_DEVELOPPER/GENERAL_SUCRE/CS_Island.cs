@@ -95,7 +95,7 @@ public class CS_Island : MonoBehaviour
         transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedRotation);
         transform.Translate(-transform.forward * currentBoost * Time.deltaTime * speedBoost, Space.World);
         
-        Debug.DrawRay(transform.position, transform.forward * 100, Color.red, 0.5f);
+        //Debug.DrawRay(transform.position, transform.forward * 100, Color.red, 0.5f);
 
         float deltaAltitude = targetAltitude - currentAltitude;
         if (deltaAltitude > 10)
