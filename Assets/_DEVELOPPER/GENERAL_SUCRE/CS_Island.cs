@@ -13,6 +13,8 @@ public class CS_Island : MonoBehaviour
     [SerializeField] AnimationCurve speedForwardCurve;
     [SerializeField] AnimationCurve speedRotationCurve;
     [SerializeField] AnimationCurve speedUpCurve;
+    
+    [SerializeField] AnimationCurve slowDamperCurve;
 
     float timerBeginRotation;
     float timerBeginAltittude;
@@ -106,16 +108,30 @@ public class CS_Island : MonoBehaviour
         transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedMaxRotation);
         transform.Translate(-transform.forward * currentBoost * Time.deltaTime * speedMaxBoost, Space.World);
 
+        float slowMultiplicateur = 1;
+
         float deltaAltitude = targetAltitude - currentAltitude;
-        if (deltaAltitude > 10)
+        if (deltaAltitude > 5)
         {
             //transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * speedMaxAltitude, transform.position.z);
-            transform.Translate(Vector3.up * Time.deltaTime * speedMaxAltitude * speedUpCurve.Evaluate(timerBeginAltittude));
+            if (timerBeginAltittude != 0)
+            {
+                slowMultiplicateur = slowDamperCurve.Evaluate(deltaAltitude);
+            }
+            transform.Translate(slowMultiplicateur * Vector3.up * Time.deltaTime * speedMaxAltitude * speedUpCurve.Evaluate(timerBeginAltittude));
         }
-        else if (deltaAltitude < -10)
+        else if (deltaAltitude < -5)
         {
-//            transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * -speedMaxAltitude, transform.position.z);
-            transform.Translate(-Vector3.up * Time.deltaTime * speedMaxAltitude * speedUpCurve.Evaluate(timerBeginAltittude));
+            if (timerBeginAltittude != 0)
+            {
+                slowMultiplicateur = slowDamperCurve.Evaluate(-deltaAltitude);
+            }
+            //transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * -speedMaxAltitude, transform.position.z);
+            transform.Translate(slowMultiplicateur * -Vector3.up * Time.deltaTime * speedMaxAltitude * speedUpCurve.Evaluate(timerBeginAltittude));
+        }
+        else
+        {
+            timerBeginAltittude = 0;
         }
 
         UI_Debug();
@@ -147,7 +163,7 @@ public class CS_Island : MonoBehaviour
     {
         upDown = value.ReadValue<Vector2>().y;
         targetAltitude += upDown / 20;
-        timerBeginAltittude = 0;
+
     }
 
     public void ResetDecalLook()
@@ -175,6 +191,22 @@ public class CS_Island : MonoBehaviour
             decalCinemachineTargetYaw = Mathf.Clamp(decalCinemachineTargetYaw, -90, 90);
 
             CM_Camera.transform.localRotation = Quaternion.Euler(initRotation.x + decalCinemachineTargetPitch, initRotation.y + decalCinemachineTargetYaw, 0.0f);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.transform.parent = gameObject.transform;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            other.transform.parent = null;
         }
     }
 }
