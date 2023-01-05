@@ -9,21 +9,30 @@ using static UnityEngine.InputSystem.InputAction;
 
 public class CS_Island : MonoBehaviour
 {
+    [Header("Refences")]
+    GameObject player;
+    ThirdPersonController thirdPersonController;
+    PlayerInput playerInput;
+    Rigidbody _rigidbody;
+
+    [Space(10)]
+    [Header("Controls Values")]
+    [Space(5)]
     //[Tooltip("X = Forward | Y = UP | Z = RightLeft")]
     [SerializeField] AnimationCurve speedForwardCurve;
     [SerializeField] AnimationCurve speedRotationCurve;
     [SerializeField] AnimationCurve speedUpCurve;
-    
+
     [SerializeField] AnimationCurve slowDamperCurve;
+
+    [SerializeField] private float speedMaxRotation;
+    [SerializeField] private float speedMaxBoost;
+    [SerializeField] private float speedMaxAltitude;
 
     float timerBeginRotation;
     float timerBeginAltittude;
     float timerBeginBoost;
 
-    GameObject player;
-    ThirdPersonController thirdPersonController;
-    PlayerInput playerInput;
-    Rigidbody _rigidbody;
     private bool isDriving = false;
 
     Vector2 initRotation;
@@ -43,18 +52,18 @@ public class CS_Island : MonoBehaviour
 
     float targetAltitude;
 
-    [SerializeField] private float speedMaxRotation;
-    [SerializeField] private float speedMaxBoost;
-    [SerializeField] private float speedMaxAltitude;
 
+    [Space(10)]
+    [Header("Camera")]
     [Space(5)]
     [SerializeField] private GameObject CM_Camera;
     [SerializeField] private float thresholdLookCamera;
+    [SerializeField] CinemachineBrain CM_Brain;
 
     [Space(10)]
+    [Header("UI")]
+    [Space(5)]
     [SerializeField] TextMeshProUGUI UI_angleRot;
-
-    [SerializeField] CinemachineBrain CM_Brain;
 
     public bool IsDriving { get => isDriving; set => isDriving = value; }
 
@@ -149,6 +158,7 @@ public class CS_Island : MonoBehaviour
         UI_angleRot.text = currentAngleDirection.ToString();
     }
 
+    #region Inputs
     public void Move(CallbackContext value)
     {
         Vector2 vector = value.ReadValue<Vector2>();
@@ -193,8 +203,10 @@ public class CS_Island : MonoBehaviour
             CM_Camera.transform.localRotation = Quaternion.Euler(initRotation.x + decalCinemachineTargetPitch, initRotation.y + decalCinemachineTargetYaw, 0.0f);
         }
     }
+    #endregion
 
-    private void OnTriggerEnter(Collider other)
+    #region Trigger
+    private void OnTriggerEnter(Collider other) //Attach player into island
     {
         if (other.tag == "Player")
         {
@@ -202,11 +214,12 @@ public class CS_Island : MonoBehaviour
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnTriggerExit(Collider other) //Detach player of island
     {
         if (other.tag == "Player")
         {
             other.transform.parent = null;
         }
     }
+    #endregion
 }
