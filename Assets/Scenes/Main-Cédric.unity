@@ -721,28 +721,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 155588985}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &165453840 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4874395311927228608, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-    type: 3}
-  m_PrefabInstance: {fileID: 4874395311716541593}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &165453846
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 165453840}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &197854012
 GameObject:
   m_ObjectHideFlags: 0
@@ -4450,24 +4428,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832705584}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!1 &860048210 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5720764928226203881, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-    type: 3}
-  m_PrefabInstance: {fileID: 4874395311716541593}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &860048216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 860048210}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd2043e2958005e4fb69a79528caecee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &866431649
 GameObject:
   m_ObjectHideFlags: 0
@@ -10011,17 +9971,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 56c50600d6d1c5547b85577619e840ce,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -102.7
+      value: -165.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56c50600d6d1c5547b85577619e840ce,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -38.55
+      value: -38.6
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56c50600d6d1c5547b85577619e840ce,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -101
+      value: -131.3
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 56c50600d6d1c5547b85577619e840ce,
         type: 3}
@@ -10065,28 +10025,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56c50600d6d1c5547b85577619e840ce, type: 3}
---- !u!1 &1978790745 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6922626010783916603, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-    type: 3}
-  m_PrefabInstance: {fileID: 4874395311716541593}
-  m_PrefabAsset: {fileID: 0}
---- !u!54 &1978790751
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1978790745}
-  serializedVersion: 2
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_UseGravity: 0
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &2016021469
 GameObject:
   m_ObjectHideFlags: 0
@@ -10842,6 +10780,26 @@ PrefabInstance:
       propertyPath: cameraPlayer
       value: 
       objectReference: {fileID: 1111601064}
+    - target: {fileID: 2791142497188437987, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 103.75
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791142497188437987, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 124.631355
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791142497188437987, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2791142497188437987, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -8.3
+      objectReference: {fileID: 0}
     - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
         type: 3}
       propertyPath: CM_Brain
@@ -10849,254 +10807,9 @@ PrefabInstance:
       objectReference: {fileID: 546303261}
     - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
         type: 3}
-      propertyPath: speedCurve
-      value: 
-      objectReference: {fileID: 860048216}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
       propertyPath: UI_angleRot
       value: 
       objectReference: {fileID: 655091532}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedMaxBoost
-      value: 20
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotation
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedMaxAltitude
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedMaxRotation
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.size
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[1].time
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[1].time
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[0].inSlope
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[1].inSlope
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[1].value
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[0].outSlope
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[1].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[1].outSlope
-      value: 0.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[1].time
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[0].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[0].inSlope
-      value: 0.055827435
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[1].inSlope
-      value: 0.26208797
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[1].value
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[0].time
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[1].time
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[0].outSlope
-      value: 0.055827435
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[1].inWeight
-      value: 0.08451481
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[1].outSlope
-      value: 0.26208797
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[0].value
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[1].value
-      value: 0.01
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[0].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedUpCurve.m_Curve.Array.data[1].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: slowDamperCurve.m_Curve.Array.data[0].outWeight
-      value: 0.5076907
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[0].inSlope
-      value: 0.0009999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[1].inSlope
-      value: 0.0009999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[0].outSlope
-      value: 0.0009999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[1].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[1].outSlope
-      value: 0.0009999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[0].inSlope
-      value: 0.0019999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[1].inSlope
-      value: 0.0019999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[0].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[0].outSlope
-      value: 0.0019999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[1].inWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[1].outSlope
-      value: 0.0019999999
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[0].outWeight
-      value: 0.33333334
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[0].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedForwardCurve.m_Curve.Array.data[1].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[0].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
-    - target: {fileID: 4874395312311244949, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
-        type: 3}
-      propertyPath: speedRotationCurve.m_Curve.Array.data[1].tangentMode
-      value: 34
-      objectReference: {fileID: 0}
     - target: {fileID: 4913407165842047571, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
         type: 3}
       propertyPath: m_RootOrder
