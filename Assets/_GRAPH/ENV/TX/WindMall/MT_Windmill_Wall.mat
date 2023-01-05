@@ -303,7 +303,7 @@ Material:
     - _HighColor: {r: 7867.3696, g: 7221.356, b: 6189.9873, a: 0}
     - _InvPrimScale: {r: 1, g: 1, b: 0, a: 0}
     - _IridescenceThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
-    - _LowColor: {r: 1024, g: 725.6499, b: 486.883, a: 0}
+    - _LowColor: {r: 1023.9999, g: 487.8743, b: 752.7952, a: 0}
     - _SpecularColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThicknessRemap: {r: 0, g: 1, b: 0, a: 0}
     - _TransmittanceColor: {r: 1, g: 1, b: 1, a: 1}
