@@ -65,6 +65,12 @@ public class CS_Island : MonoBehaviour
     [Space(5)]
     [SerializeField] TextMeshProUGUI UI_angleRot;
 
+    [Space(10)]
+    [Header("Controls Values")]
+    [Space(5)]
+    [SerializeField] Animator animatorWings;
+
+
     public bool IsDriving { get => isDriving; set => isDriving = value; }
 
     private void Start()
@@ -114,6 +120,8 @@ public class CS_Island : MonoBehaviour
 
         currentBoost = Mathf.Clamp(currentBoost, -1, 1);
 
+        UptadeAnimationWings();
+
         transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedMaxRotation);
         transform.Translate(-transform.forward * currentBoost * Time.deltaTime * speedMaxBoost, Space.World);
 
@@ -151,6 +159,11 @@ public class CS_Island : MonoBehaviour
         timerBeginRotation += Time.deltaTime;
         timerBeginAltittude += Time.deltaTime;
         timerBeginBoost += Time.deltaTime;
+    }
+
+    private void UptadeAnimationWings()
+    {
+        animatorWings.speed = Mathf.Abs(currentBoost);
     }
 
     private void UI_Debug()
