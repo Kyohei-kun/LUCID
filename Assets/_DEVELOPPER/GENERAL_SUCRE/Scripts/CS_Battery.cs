@@ -15,8 +15,10 @@ public class CS_Battery : CS_Item
 
     public float CurrentEnergy { get => currentEnergy; set => currentEnergy = value; }
 
-    private void Start()
+    protected new void Start()
     {
+        base.Start();
+        //currentMatFill = new Material(source_MatFill);
         fillObject.GetComponent<Renderer>().material = new Material(source_MatFill);
         currentMatFill = fillObject.GetComponent<Renderer>().material;
         UpdateFill();

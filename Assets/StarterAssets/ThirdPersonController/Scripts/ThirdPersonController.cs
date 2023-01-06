@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
@@ -13,12 +14,23 @@ namespace StarterAssets
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
     [RequireComponent(typeof(PlayerInput))]
 #endif
+
+
     public class ThirdPersonController : MonoBehaviour
     {
         [SerializeField] private CS_UIManager UI_Manager;
         [SerializeField] CS_Island island;
+        [SerializeField] CS_PlayerTriggerItem playerTriggerItem;
 
         private I_Interact currentTrigger;
+
+        [Space(10)]
+        [Header("Sockets Object")]
+        [SerializeField] Transform socketRight;
+        [SerializeField] Transform socketLeft;
+        [SerializeField] Transform socketMiddle;
+
+        private List<CS_Item> itemsInHand;
 
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -156,6 +168,8 @@ namespace StarterAssets
             // reset our timeouts on start
             _jumpTimeoutDelta = JumpTimeout;
             _fallTimeoutDelta = FallTimeout;
+
+            itemsInHand = new List<CS_Item>();
         }
 
         private void Update()
@@ -166,16 +180,16 @@ namespace StarterAssets
             GroundedCheck();
             Move();
 
-            if(currentTrigger != null)
+            if (currentTrigger != null)
             {
-                if(!currentTrigger.PlayerIsInTrigger())
+                if (!currentTrigger.PlayerIsInTrigger())
                 {
                     currentTrigger = null;
                     UI_Manager.UnDrawInteractUI();
                 }
             }
 
-            if(island.IsDriving)
+            if (island.IsDriving)
                 GetComponent<CharacterController>().enabled = false;
             else
                 GetComponent<CharacterController>().enabled = true;
@@ -229,7 +243,7 @@ namespace StarterAssets
             _cinemachineTargetPitch = _cinemachineTargetPitch.ClampAngle(BottomClamp, TopClamp);
 
             // Cinemachine will follow this target
-            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,_cinemachineTargetYaw + island.transform.eulerAngles.y, 0.0f);
+            CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride, _cinemachineTargetYaw + island.transform.eulerAngles.y, 0.0f);
         }
 
         private void Move()
@@ -376,7 +390,7 @@ namespace StarterAssets
         //    if (lfAngle > 360f) lfAngle -= 360f;
         //    return Mathf.Clamp(lfAngle, lfMin, lfMax);
         //}
-       
+
         private void OnDrawGizmosSelected()
         {
             Color transparentGreen = new Color(0.0f, 1.0f, 0.0f, 0.35f);
@@ -413,9 +427,26 @@ namespace StarterAssets
 
         private void OnInteract(InputValue value)
         {
-            if(currentTrigger != null)
+            if (currentTrigger != null)
             {
                 currentTrigger.Interract();
+            }
+            else
+            {
+                if (itemsInHand.Count == 0)
+                {
+                    CS_Item currentItem = playerTriggerItem.GetItem();
+                    if (currentItem != null)
+                    {
+                        itemsInHand.Add(currentItem);
+                        currentItem.Taked(socketMiddle);
+                    }
+                }
+                else
+                {
+                    itemsInHand[0].Dropped();
+                    itemsInHand.Clear();
+                }
             }
         }
 
