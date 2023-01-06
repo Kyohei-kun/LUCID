@@ -102,7 +102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4bbac7f38a370cc47a351b68ebe47445, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sizeItem: 0
+  sizeItem: 1
   currentEnergy: 0
   maxEnergy: 4500
   fillObject: {fileID: 4200620062991435066}

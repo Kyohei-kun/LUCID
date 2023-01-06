@@ -10,9 +10,12 @@ public enum SizeItem
 
 public class CS_Item : MonoBehaviour
 {
-    [SerializeField] protected SizeItem sizeItem;
-    protected bool isInHand;
+    [SerializeField] private SizeItem sizeItem;
+    private bool isInHand;
     protected Rigidbody _rigidbody;
+
+    public SizeItem SizeItem { get => sizeItem; set => sizeItem = value; }
+    public bool IsInHand { get => isInHand; set => isInHand = value; }
 
     protected void Start()
     {
@@ -21,7 +24,7 @@ public class CS_Item : MonoBehaviour
 
     public void Taked(Transform socket)
     {
-        isInHand = true;
+        IsInHand = true;
         _rigidbody.useGravity = false;
         _rigidbody.isKinematic = true;
         transform.parent = socket;
@@ -31,7 +34,7 @@ public class CS_Item : MonoBehaviour
 
     public void Dropped()
     {
-        isInHand = false;
+        IsInHand = false;
         _rigidbody.useGravity = true;
         _rigidbody.isKinematic = false;
         if (transform.parent.parent.parent.tag == "Island")
