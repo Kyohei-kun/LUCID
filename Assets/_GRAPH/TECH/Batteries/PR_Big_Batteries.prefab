@@ -11,9 +11,12 @@ GameObject:
   - component: {fileID: 170788027044963795}
   - component: {fileID: 3515350153744038978}
   - component: {fileID: 1670271545921489032}
-  m_Layer: 0
+  - component: {fileID: 8821146399360964581}
+  - component: {fileID: 3635543550930565815}
+  - component: {fileID: 3761032755534425080}
+  m_Layer: 3
   m_Name: PR_Big_Batteries
-  m_TagString: Untagged
+  m_TagString: Battery
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -86,6 +89,52 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8821146399360964581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603304585488347370}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bbac7f38a370cc47a351b68ebe47445, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  size: 1
+  currentEnergy: 0
+  maxEnergy: 4500
+  fillObject: {fileID: 4200620062991435066}
+  source_MatFill: {fileID: 2100000, guid: 0a6c1cdb37d5e1648aca4394535425b8, type: 2}
+--- !u!65 &3635543550930565815
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603304585488347370}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.68380475, y: 0.67531693, z: 0.7586476}
+  m_Center: {x: 0, y: 1.7728467e-15, z: 0.37475294}
+--- !u!54 &3761032755534425080
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 603304585488347370}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &1311168251645140542
 GameObject:
   m_ObjectHideFlags: 0

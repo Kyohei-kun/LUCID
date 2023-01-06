@@ -6,15 +6,16 @@ TagManager:
   tags:
   - CinemachineTarget
   - Island
+  - Battery
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Pushing
   - Water
   - UI
-  - 
-  - 
+  - Player
+  - Item
   - 
   - 
   - 
