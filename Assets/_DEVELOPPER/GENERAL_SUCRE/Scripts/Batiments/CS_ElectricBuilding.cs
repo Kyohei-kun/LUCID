@@ -6,5 +6,8 @@ public class CS_ElectricBuilding : CS_Building
 {
     protected CS_Battery battery;
 
-    public CS_Battery Battery { get => battery; set => battery = value; }
+    public void  SetBattery(CS_Battery bat)
+    {
+        battery = bat;
+    }
 }

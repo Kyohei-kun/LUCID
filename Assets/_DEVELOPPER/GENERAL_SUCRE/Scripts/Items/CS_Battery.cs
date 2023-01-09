@@ -27,17 +27,24 @@ public class CS_Battery : CS_Item
     public float Charge(float energy)
     {
         float deltaEnergy = maxEnergy - currentEnergy;
-        float reste = energy - deltaEnergy;
 
         currentEnergy += energy;
         currentEnergy = Mathf.Clamp(currentEnergy, 0, maxEnergy);
 
         UpdateFill();
 
-        if (reste > 0)
-            return reste;
-        else
+        if (deltaEnergy > energy)
+        {
+            return energy;
+        }
+        else if(deltaEnergy == energy)
+        {
             return 0;
+        }
+        else
+        {
+            return deltaEnergy;
+        }
     }
 
     private void UpdateFill()

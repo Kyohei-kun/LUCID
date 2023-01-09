@@ -206,7 +206,7 @@ GameObject:
   - component: {fileID: 8740715902086764365}
   - component: {fileID: 8740715902086764366}
   m_Layer: 0
-  m_Name: BatterySocle
+  m_Name: PR_BatterySocle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

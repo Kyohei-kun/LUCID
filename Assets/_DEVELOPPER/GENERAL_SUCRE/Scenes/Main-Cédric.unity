@@ -11747,6 +11747,11 @@ PrefabInstance:
       propertyPath: UI_angleRot
       value: 
       objectReference: {fileID: 655091532}
+    - target: {fileID: 4913407164654771639, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -13.15
+      objectReference: {fileID: 0}
     - target: {fileID: 4913407165842047571, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
         type: 3}
       propertyPath: m_RootOrder

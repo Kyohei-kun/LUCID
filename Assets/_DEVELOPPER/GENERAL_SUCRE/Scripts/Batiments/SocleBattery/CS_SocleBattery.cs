@@ -4,36 +4,36 @@ using UnityEngine;
 
 public class CS_SocleBattery : MonoBehaviour
 {
-    CS_Battery currentBattery;
-    [SerializeField] CS_ElectricBuilding electricBuilding;
+    protected CS_Battery currentBattery;
+    [SerializeField] protected CS_ElectricBuilding electricBuilding;
     [Space(10)]
     [Header("Decal Socket Battery")]
 
-    [SerializeField] Transform socket;
+    [SerializeField] protected Transform socket;
 
     [Space(5)]
-    [SerializeField] Vector3 decalSmallBattery;
-    [SerializeField] Vector3 decalLargeBattery;
+    [SerializeField] protected Vector3 decalSmallBattery;
+    [SerializeField] protected Vector3 decalLargeBattery;
 
 
-    private void OnTriggerEnter(Collider other)
+    protected void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Battery" && currentBattery == null && other.GetComponent<CS_Battery>().IsInHand == false)
         {
             currentBattery = other.GetComponent<CS_Battery>();
-            electricBuilding.Battery = currentBattery;
+            electricBuilding.SetBattery(currentBattery);
             currentBattery.transform.position = socket.position + (currentBattery.SizeItem == SizeItem.Small ? decalSmallBattery : decalLargeBattery);
             currentBattery.transform.localEulerAngles = Vector3.zero;
             currentBattery.GetComponent<Rigidbody>().isKinematic = true;
         }
     }
 
-    private void OnTriggerExit(Collider other)
+    protected void OnTriggerExit(Collider other)
     {
         if(other.tag == "Battery" && other.GetComponent<CS_Battery>() == currentBattery)
         {
             currentBattery = null;
-            electricBuilding.Battery = null;
+            electricBuilding.SetBattery(null);
         }
     }
 }
