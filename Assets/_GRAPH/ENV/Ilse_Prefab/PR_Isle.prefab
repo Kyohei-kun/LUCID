@@ -4755,7 +4755,7 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -9588,7 +9588,7 @@ ParticleSystemRenderer:
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
-  m_MotionVectors: 1
+  m_MotionVectors: 0
   m_LightProbeUsage: 0
   m_ReflectionProbeUsage: 0
   m_RayTracingMode: 0
@@ -10922,6 +10922,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[6]
       value: 
       objectReference: {fileID: 2100000, guid: 80e60dbd15b5c8342b7afe37284cba8f, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 1218be4856e9f2e4bace917d8a1f09f3,
+        type: 3}
+      propertyPath: m_Materials.Array.data[7]
+      value: 
+      objectReference: {fileID: 2100000, guid: c342b8bfcaf76854490f4e558715ae46, type: 2}
     - target: {fileID: 919132149155446097, guid: 1218be4856e9f2e4bace917d8a1f09f3,
         type: 3}
       propertyPath: m_Name

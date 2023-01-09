@@ -117,11 +117,11 @@ Material:
     - _transparency: 1
     m_Colors:
     - _BaseColor: {r: 0.024103705, g: 0, b: 0.6037736, a: 0}
-    - _BottomColor: {r: 34.29675, g: 34.29675, b: 34.29675, a: 0}
+    - _BottomColor: {r: 0.46107566, g: 0.46107566, b: 0.46107566, a: 0}
     - _DiffusionProfileAsset: {r: 0, g: 0, b: 0, a: 0}
     - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _TopColor: {r: 8.031373, g: 0, b: 154.60393, a: 0}
+    - _TopColor: {r: 2.1849117, g: 0, b: 41.73181, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &6167801748283176399
 MonoBehaviour:
