@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 9155115562565836815}
   - component: {fileID: 9155115562565836808}
   m_Layer: 0
-  m_Name: PR_TRansfert
+  m_Name: PR_Transfert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

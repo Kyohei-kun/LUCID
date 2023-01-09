@@ -3461,6 +3461,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 654023738, guid: f6d148d888ffbf54b9afe9936dfaec1f, type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8944336655422409496, guid: f6d148d888ffbf54b9afe9936dfaec1f,
         type: 3}
       propertyPath: m_HDR
@@ -6519,6 +6523,26 @@ Transform:
   m_Father: {fileID: 786897413}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1150797791 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2546522555900907707, guid: 40ba1b6cc6abb2843b1662fa0eb37dce,
+    type: 3}
+  m_PrefabInstance: {fileID: 4874395311716541593}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1150797795
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150797791}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6262265503141908169, guid: 1218be4856e9f2e4bace917d8a1f09f3, type: 3}
 --- !u!1 &1152092165
 GameObject:
   m_ObjectHideFlags: 0
