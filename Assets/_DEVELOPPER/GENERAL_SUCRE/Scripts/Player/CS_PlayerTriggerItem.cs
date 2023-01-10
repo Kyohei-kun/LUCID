@@ -20,6 +20,7 @@ public class CS_PlayerTriggerItem : MonoBehaviour
         {
             items.Add(currentItem);
         }
+        CleanList();
     }
 
     private void OnTriggerExit(Collider other)
@@ -30,6 +31,7 @@ public class CS_PlayerTriggerItem : MonoBehaviour
         {
             items.Remove(currentItem);
         }
+
     }
 
     public CS_Item GetItem()
@@ -43,5 +45,16 @@ public class CS_PlayerTriggerItem : MonoBehaviour
             return null;
         }
         return items[0];
+    }
+
+    private void CleanList()
+    {
+        foreach (var item in items.ToList())
+        {
+            if(item == null)
+            {
+                items.Remove(item);
+            }
+        }
     }
 }

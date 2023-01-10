@@ -8,7 +8,8 @@ public class CS_Battery : CS_Item
     [SerializeField] float currentEnergy;
     [SerializeField] float maxEnergy;
 
-    [Space(10)] [Header("Fill")]
+    [Space(10)]
+    [Header("Fill")]
     [SerializeField] GameObject fillObject;
     [SerializeField] Material source_MatFill;
     Material currentMatFill;
@@ -24,6 +25,10 @@ public class CS_Battery : CS_Item
         UpdateFill();
     }
 
+    /// <summary>
+    /// </summary>
+    /// <param name="energy"></param>
+    /// <returns>The return is the excess energy</returns>
     public float Charge(float energy)
     {
         float deltaEnergy = maxEnergy - currentEnergy;
@@ -37,7 +42,7 @@ public class CS_Battery : CS_Item
         {
             return energy;
         }
-        else if(deltaEnergy == energy)
+        else if (deltaEnergy == energy)
         {
             return 0;
         }
@@ -45,6 +50,32 @@ public class CS_Battery : CS_Item
         {
             return deltaEnergy;
         }
+    }
+
+
+    /// <summary>
+    /// </summary>
+    /// <param name="energy"></param>
+    /// <returns>True if enough energy</returns>
+    public bool UseEnergy(float energy)
+    {
+        if(HaveEnoughEnergy(energy))
+        {
+            currentEnergy -= energy;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public bool HaveEnoughEnergy(float energy)
+    {
+        if (energy <= currentEnergy)
+            return true;
+        else
+            return false;
     }
 
     private void UpdateFill()
