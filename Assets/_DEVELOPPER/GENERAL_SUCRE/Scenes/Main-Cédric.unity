@@ -1860,7 +1860,7 @@ PrefabInstance:
     - target: {fileID: 9155115562565836809, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
         type: 3}
       propertyPath: m_Name
-      value: PR_Transfert
+      value: PR_Transfer
       objectReference: {fileID: 0}
     - target: {fileID: 9155115562565836815, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
         type: 3}
