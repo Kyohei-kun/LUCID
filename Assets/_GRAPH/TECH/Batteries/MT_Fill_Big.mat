@@ -71,7 +71,7 @@ Material:
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
-    - _Fill: 0.968
+    - _Fill: 0.417
     - _OpaqueCullMode: 2
     - _Pailette_Force: 2
     - _RayTracing: 0

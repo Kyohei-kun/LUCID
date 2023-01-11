@@ -91,7 +91,7 @@ Material:
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
-    - _Slider: 1
+    - _Slider: 0.035
     - _SrcBlend: 1
     - _StencilRef: 0
     - _StencilRefDepth: 8
