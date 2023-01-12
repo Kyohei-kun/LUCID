@@ -1618,6 +1618,24 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 282195187}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &307098842 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 899355086768077631, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+    type: 3}
+  m_PrefabInstance: {fileID: 320265689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &307098844 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7992876154313657869, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+    type: 3}
+  m_PrefabInstance: {fileID: 320265689}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &307098845 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1692186738726787818, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+    type: 3}
+  m_PrefabInstance: {fileID: 320265689}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &310060565
 GameObject:
   m_ObjectHideFlags: 0
@@ -1857,6 +1875,46 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2939775227366658612, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2939775227366658612, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 2939775227366658612, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 7992876154313657869, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9155115562565836808, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: animator
+      value: 
+      objectReference: {fileID: 307098844}
+    - target: {fileID: 9155115562565836808, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: visuelGo
+      value: 
+      objectReference: {fileID: 307098842}
+    - target: {fileID: 9155115562565836808, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: visuelRender
+      value: 
+      objectReference: {fileID: 307098845}
+    - target: {fileID: 9155115562565836808, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
+        type: 3}
+      propertyPath: sourceMaterial
+      value: 
+      objectReference: {fileID: 2100000, guid: faa1ca0bab9024049acbc7545833504d, type: 2}
     - target: {fileID: 9155115562565836809, guid: 56794cf6afa64ab4d93cb4b74aea7ba7,
         type: 3}
       propertyPath: m_Name
