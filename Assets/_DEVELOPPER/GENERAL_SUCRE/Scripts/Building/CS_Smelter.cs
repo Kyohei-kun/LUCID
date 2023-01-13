@@ -6,6 +6,7 @@ public class CS_Smelter : CS_ElectricBuilding
 {
     [SerializeField] GameObject prefabMetal;
     [SerializeField] Transform socket;
+    Transform itemParent;
     [Space(10)]
     [SerializeField] int scrapByMetal;
     [SerializeField] float energyCost;
@@ -23,9 +24,11 @@ public class CS_Smelter : CS_ElectricBuilding
 
     int nbScrapCharged;
 
+
     private void Start()
     {
         bufferScraps = new List<CS_Scrap>();
+        itemParent = GameObject.FindGameObjectWithTag("ItemsParent").transform;
     }
 
     private void Update()
@@ -47,6 +50,7 @@ public class CS_Smelter : CS_ElectricBuilding
             {
                 GameObject temp = Instantiate(prefabMetal);
                 temp.transform.position = socket.position;
+                temp.transform.parent = itemParent;
                 currentTimer = 0;
                 nbScrapCharged = 0;
                 currentCostUsed = 0;
@@ -109,39 +113,3 @@ public class CS_Smelter : CS_ElectricBuilding
         }
     }
 }
-//IEnumerator Smelting()
-//{
-//    while (currentScrap >= scrapByMetal)
-//    {
-//        float futureCurrentTimer = currentTimer + Time.deltaTime;
-//        targetCost = futureCurrentTimer.Remap(0, timeSmelting, 0, energyCost);
-//        deltaCost = targetCost - currentCostUsed;
-
-//        if (battery == null || battery.CurrentEnergy < deltaCost)
-//        {
-//            isWork = false;
-//        }
-//        else
-//        {
-//            isWork = true;
-//        }
-
-//        if (isWork)
-//        {
-//            battery.Charge(-deltaCost);
-//            currentTimer += Time.deltaTime;
-//            currentCostUsed += deltaCost;
-//        }
-
-//        if (currentTimer >= timeSmelting)
-//        {
-//            currentScrap -= scrapByMetal;
-//            GameObject temp = Instantiate(prefabMetal);
-//            temp.transform.position = socket.position;
-//        }
-
-
-//        yield return null;
-//    }
-//}
-

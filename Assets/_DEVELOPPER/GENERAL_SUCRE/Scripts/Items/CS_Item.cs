@@ -11,11 +11,17 @@ public enum SizeItem
 public class CS_Item : MonoBehaviour
 {
     [SerializeField] private SizeItem sizeItem;
-    private bool isInHand;
+    protected E_Item enumItem;
+
+    protected bool isInHand;
+    protected bool canBeTakable = true;
     protected Rigidbody _rigidbody;
+
+    [SerializeField] protected Vector3 defaultRotation;
 
     public SizeItem SizeItem { get => sizeItem; set => sizeItem = value; }
     public bool IsInHand { get => isInHand; set => isInHand = value; }
+    public bool CanBeTakable { get => canBeTakable; set => canBeTakable = value; }
 
     protected void Start()
     {
@@ -44,4 +50,10 @@ public class CS_Item : MonoBehaviour
         else
             transform.parent = null;
     }
+
+    public E_Item ToEnum()
+    {
+        return enumItem;
+    }
+   
 }

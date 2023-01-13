@@ -436,7 +436,7 @@ namespace StarterAssets
                 if (itemsInHand.Count == 0)
                 {
                     CS_Item currentItem = playerTriggerItem.GetItem();
-                    if (currentItem != null)
+                    if (currentItem != null && currentItem.CanBeTakable == true)
                     {
                         itemsInHand.Add(currentItem);
                         currentItem.Taked(socketMiddle);

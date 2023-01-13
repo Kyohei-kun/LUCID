@@ -68,7 +68,7 @@ public class CS_Transfert : CS_ElectricBuilding
     {
         while (true)
         {
-            if (battery.CurrentEnergy == 0)
+            if (battery.CurrentEnergy == 0 || receiverBattery.CurrentEnergy == receiverBattery.MaxEnergy)
                 StopWork();
 
             float valueTransfert = Time.deltaTime.Remap(0, 1, 0, EU_By_Second);

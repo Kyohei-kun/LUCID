@@ -15,6 +15,7 @@ public class CS_Battery : CS_Item
     Material currentMatFill;
 
     public float CurrentEnergy { get => currentEnergy; set => currentEnergy = value; }
+    public float MaxEnergy { get => maxEnergy; set => maxEnergy = value; }
 
     protected new void Start()
     {

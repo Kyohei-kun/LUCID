@@ -4,4 +4,9 @@ using UnityEngine;
 
 public class CS_Metal : CS_Item
 {
+    private new void Start()
+    {
+        base.Start();
+        enumItem = E_Item.Metal;
+    }
 }
