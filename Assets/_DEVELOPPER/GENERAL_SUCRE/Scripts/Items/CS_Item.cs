@@ -13,8 +13,8 @@ public class CS_Item : MonoBehaviour
     [SerializeField] private SizeItem sizeItem;
     protected E_Item enumItem;
 
-    protected bool isInHand;
-    protected bool canBeTakable = true;
+    [SerializeField] protected bool isInHand;
+    [SerializeField] protected bool canBeTakable = true;
     protected Rigidbody _rigidbody;
 
     [SerializeField] protected Vector3 defaultRotation;

@@ -16,7 +16,7 @@ public class CS_PlayerTriggerItem : MonoBehaviour
     {
         CS_Item currentItem = other.GetComponent<CS_Item>();
 
-        if(currentItem != null && !items.Contains(currentItem))
+        if(currentItem != null && !items.Contains(currentItem) && currentItem.CanBeTakable == true)
         {
             items.Add(currentItem);
         }
