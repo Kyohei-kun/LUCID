@@ -6,7 +6,7 @@ using UnityEngine;
 public class CS_Elevator : MonoBehaviour
 {
     [SerializeField] Animator animator;
-
+    bool isIn;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -14,7 +14,7 @@ public class CS_Elevator : MonoBehaviour
         {
             animator.SetBool("PlayerIsIn", true);
             StopAllCoroutines();
-
+            isIn = true;
         }
         
     }
@@ -23,7 +23,6 @@ public class CS_Elevator : MonoBehaviour
         if (other.tag == "Player")
         {
             StartCoroutine(Wait(1));
-
         }
     }
 
@@ -31,6 +30,7 @@ public class CS_Elevator : MonoBehaviour
     {
         yield return new WaitForSeconds(timer);
         animator.SetBool("PlayerIsIn", false);
+        isIn = false;
 
     }
 }
