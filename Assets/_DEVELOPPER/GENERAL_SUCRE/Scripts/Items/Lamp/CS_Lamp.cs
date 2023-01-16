@@ -43,7 +43,7 @@ public class CS_Lamp : CS_Item
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Battery" && battery == null && other.GetComponent<CS_Battery>().IsInHand == false)
+        if (other.GetComponent<CS_Battery>() != null && battery == null && other.GetComponent<CS_Battery>().IsInHand == false)
         {
             battery = other.GetComponent<CS_Battery>();
             battery.gameObject.transform.position = socket.position + (battery.SizeItem == SizeItem.Small ? decalSmallBattery : decalLargeBattery);
@@ -57,7 +57,7 @@ public class CS_Lamp : CS_Item
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Battery" && other.GetComponent<CS_Battery>() == battery)
+        if (other.GetComponent<CS_Battery>() != null && other.GetComponent<CS_Battery>() == battery)
         {
             battery.GetComponent<Rigidbody>().isKinematic = true;
             battery = null;

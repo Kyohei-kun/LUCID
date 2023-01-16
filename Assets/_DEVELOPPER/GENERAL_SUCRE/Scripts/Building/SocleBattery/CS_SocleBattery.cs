@@ -18,7 +18,7 @@ public class CS_SocleBattery : MonoBehaviour
 
     protected void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Battery" && currentBattery == null && other.GetComponent<CS_Battery>().IsInHand == false)
+        if (other.GetComponent<CS_Battery>() != null && currentBattery == null && other.GetComponent<CS_Battery>().IsInHand == false)
         {
             currentBattery = other.GetComponent<CS_Battery>();
             electricBuilding.SetBattery(currentBattery);
@@ -30,7 +30,7 @@ public class CS_SocleBattery : MonoBehaviour
 
     protected void OnTriggerExit(Collider other)
     {
-        if(other.tag == "Battery" && other.GetComponent<CS_Battery>() == currentBattery)
+        if(other.GetComponent<CS_Battery>() != null && other.GetComponent<CS_Battery>() == currentBattery)
         {
             currentBattery = null;
             electricBuilding.SetBattery(null);

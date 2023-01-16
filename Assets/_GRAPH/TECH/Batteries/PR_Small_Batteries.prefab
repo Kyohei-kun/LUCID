@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 5341465030342581106}
   m_Layer: 3
   m_Name: PR_Small_Batteries
-  m_TagString: Battery
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -103,6 +103,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeItem: 0
+  isInHand: 0
+  canBeTakable: 1
+  defaultRotation: {x: 0, y: 0, z: 0}
   currentEnergy: 0
   maxEnergy: 1500
   fillObject: {fileID: 4670045069510233652}
@@ -151,7 +154,7 @@ GameObject:
   - component: {fileID: 5254038500106615722}
   m_Layer: 0
   m_Name: Small_Fill
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -262,7 +265,7 @@ GameObject:
   - component: {fileID: 7835312188977045308}
   m_Layer: 0
   m_Name: Point Light
-  m_TagString: Untagged
+  m_TagString: Item
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -532,6 +535,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: ST_Batterie_Small
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 14e382bd7a515cb45ab3d72f8c1638b8,
+        type: 3}
+      propertyPath: m_TagString
+      value: Item
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 14e382bd7a515cb45ab3d72f8c1638b8, type: 3}

@@ -8,7 +8,7 @@ public class CS_SocleTransfert : CS_SocleBattery
 
     protected new void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Battery" && currentBattery == null && other.GetComponent<CS_Battery>().IsInHand == false)
+        if (other.GetComponent<CS_Battery>() != null && currentBattery == null && other.GetComponent<CS_Battery>().IsInHand == false)
         {
             currentBattery = other.GetComponent<CS_Battery>();
             electricBuilding.GetComponent<CS_Transfert>().SetBattery(currentBattery, isReceiverSocle);
@@ -20,7 +20,7 @@ public class CS_SocleTransfert : CS_SocleBattery
 
     protected new void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Battery" && other.GetComponent<CS_Battery>() == currentBattery)
+        if (other.GetComponent<CS_Battery>() != null && other.GetComponent<CS_Battery>() == currentBattery)
         {
             currentBattery = null;
             electricBuilding.GetComponent<CS_Transfert>().SetBattery(null, isReceiverSocle);
