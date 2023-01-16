@@ -29,6 +29,13 @@ public class CS_Island : MonoBehaviour
     [SerializeField] private float speedMaxBoost;
     [SerializeField] private float speedMaxAltitude;
 
+    [Space(10)]
+    [Header("Threshold Controls")]
+    [Space(5)]
+    [SerializeField] float thresholdRotation;
+    [SerializeField] float thresholdBoost;
+
+
     float timerBeginRotation;
     float timerBeginAltittude;
     float timerBeginBoost;
@@ -70,6 +77,10 @@ public class CS_Island : MonoBehaviour
     [Space(5)]
     [SerializeField] Animator animatorWings;
 
+    [Space(10)]
+    [Header("Barre")]
+    [Space(5)]
+    [SerializeField] GameObject barre;
 
     public bool IsDriving { get => isDriving; set => isDriving = value; }
 
@@ -85,13 +96,13 @@ public class CS_Island : MonoBehaviour
 
     private void Update()
     {
-        if (rightLeft == 0 && Mathf.Abs(currentAngleDirection) < 0.2f && currentAngleDirection == lastAngleDirection)
+        if (rightLeft == 0 && Mathf.Abs(currentAngleDirection) < thresholdRotation && currentAngleDirection == lastAngleDirection)
         {
             currentAngleDirection = 0;
 
         }
 
-        if (forwardBackward == 0 && Mathf.Abs(currentBoost) < 0.2f && currentBoost == lastBoost)
+        if (forwardBackward == 0 && Mathf.Abs(currentBoost) < thresholdBoost && currentBoost == lastBoost)
         {
             currentBoost = 0;
         }
@@ -169,6 +180,11 @@ public class CS_Island : MonoBehaviour
     private void UI_Debug()
     {
         UI_angleRot.text = currentAngleDirection.ToString();
+        float tempAngleDirection = currentAngleDirection;
+        tempAngleDirection += 1;
+        float angleBarre = Mathf.Lerp(-450, 450, tempAngleDirection.Remap(0, 2, 0, 1));
+        Debug.Log(angleBarre);
+        barre.transform.localRotation = Quaternion.Euler(0, 0, angleBarre);
     }
 
     #region Inputs
