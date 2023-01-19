@@ -151,12 +151,12 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - HardEdgeAlpha: 0.11
-    - HardEdgeFalloff: 0.88
-    - HardEdgeSize: 0.14
-    - SoftEdgeAlpha: 0
+    - HardEdgeAlpha: 0
+    - HardEdgeFalloff: 0
+    - HardEdgeSize: 0.29
+    - SoftEdgeAlpha: 0.162
     - SoftEdgeFalloff: 0
-    - SoftEdgeSize: 0
+    - SoftEdgeSize: 14.3
     - _AORemapMax: 1
     - _AORemapMin: 0
     - _ATDistance: 1
@@ -226,7 +226,7 @@ Material:
     - _Ior: 1.5
     - _IridescenceMask: 1
     - _IridescenceThickness: 1
-    - _LightScalar: 1.5
+    - _LightScalar: 0.52
     - _LinkDetailsWithBase: 1
     - _MaterialID: 1
     - _Metallic: 0
@@ -238,7 +238,7 @@ Material:
     - _PPDMinSamples: 5
     - _PPDPrimitiveLength: 1
     - _PPDPrimitiveWidth: 1
-    - _RampLevels: 11
+    - _RampLevels: 8
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
