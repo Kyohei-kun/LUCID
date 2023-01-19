@@ -183,7 +183,6 @@ public class CS_Island : MonoBehaviour
         float tempAngleDirection = currentAngleDirection;
         tempAngleDirection += 1;
         float angleBarre = Mathf.Lerp(-450, 450, tempAngleDirection.Remap(0, 2, 0, 1));
-        Debug.Log(angleBarre);
         barre.transform.localRotation = Quaternion.Euler(0, 0, angleBarre);
     }
 

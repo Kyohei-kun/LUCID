@@ -6,13 +6,15 @@ public class CS_Building : CS_Breakable
 {
     protected bool isWork;
 
+    public bool IsWork { get => isWork; set => isWork = value; }
+
     public void StartWork()
     {
-        isWork = true;
+        IsWork = true;
     }
 
     public void StopWork()
     {
-        isWork = false;
+        IsWork = false;
     }
 }
