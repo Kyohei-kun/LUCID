@@ -82,6 +82,12 @@ public class CS_Island : MonoBehaviour
     [Space(5)]
     [SerializeField] GameObject barre;
 
+    [Space(10)]
+    [Header("Altimètre")]
+    [Space(5)]
+    [SerializeField] Transform controlCursor;
+    [SerializeField] Transform currentCursor;
+
     public bool IsDriving { get => isDriving; set => isDriving = value; }
 
     private void Start()
@@ -162,7 +168,8 @@ public class CS_Island : MonoBehaviour
             timerBeginAltittude = 0;
         }
 
-        UI_Debug();
+        UpdateBarreRotation();
+        UpdateAltimetre();
 
         lastAngleDirection = currentAngleDirection;
         lastBoost = currentBoost;
@@ -177,7 +184,16 @@ public class CS_Island : MonoBehaviour
         animatorWings.speed = Mathf.Abs(currentBoost);
     }
 
-    private void UI_Debug()
+    private void UpdateAltimetre()
+    {
+        float tempAlt = currentAltitude;
+        currentCursor.localRotation = Quaternion.Euler(tempAlt.Remap(20000,-20000, 0, 80), 90, 180);
+
+        float tempTargetAltitude = targetAltitude;
+        controlCursor.localRotation = Quaternion.Euler(tempTargetAltitude.Remap(20000, -20000, 0, 80), 90, 0);
+    }
+
+    private void UpdateBarreRotation()
     {
         UI_angleRot.text = currentAngleDirection.ToString();
         float tempAngleDirection = currentAngleDirection;
