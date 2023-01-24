@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CS_GrandeLigne : CS_ElectricBuilding
@@ -9,6 +10,8 @@ public class CS_GrandeLigne : CS_ElectricBuilding
     [SerializeField] List<Transform> socketsSpawn;
     [SerializeField] GameObject prefabScrap;
     [SerializeField] Coroutine co_StartSpawn;
+    [SerializeField] float scrapMax;
+    [SerializeField] float energyBySecond;
     bool canSpawn;
     List<CS_Scrap> scrapsSpawned;
 
@@ -63,35 +66,54 @@ public class CS_GrandeLigne : CS_ElectricBuilding
         {
             if (canSpawn)
             {
-                if (Random.Range(0, 100) < chanceSpawn)
+                if (battery == null || battery.CurrentEnergy < energyBySecond)
                 {
-                    GameObject temp = Instantiate(prefabScrap);
-                    temp.transform.position = NextPositionSpawn();
-                    temp.GetComponent<Rigidbody>().useGravity = false; 
-                    temp.GetComponent<Rigidbody>().isKinematic = true; 
-                    temp.transform.parent = socketsSpawn[0].transform;
-                    temp.transform.localRotation = Quaternion.Euler(0, 90, 0);
-                    scrapsSpawned.Add(temp.GetComponent<CS_Scrap>());
-                }                                                      
-            }                                                          
-            yield return new WaitForSecondsRealtime(1);                
-        }                                                              
+                    StopWork();
+                    DestroyAllScrap();
+                    break;
+                }
+                battery.UseEnergy(energyBySecond);
+                if (scrapsSpawned.Count < scrapMax)
+                {
+                    if (Random.Range(0, 100) < chanceSpawn)
+                    {
+                        GameObject temp = Instantiate(prefabScrap);
+                        temp.transform.position = NextPositionSpawn();
+                        temp.GetComponent<Rigidbody>().useGravity = false;
+                        temp.GetComponent<Rigidbody>().isKinematic = true;
+                        temp.transform.parent = socketsSpawn[0].transform;
+                        temp.transform.localRotation = Quaternion.Euler(0, 0, 90);
+                        scrapsSpawned.Add(temp.GetComponent<CS_Scrap>());
+                    }
+                }
+            }
+            yield return new WaitForSecondsRealtime(1);
+        }
     }
 
     private Vector3 NextPositionSpawn()
     {
-        if(scrapsSpawned.Count < socketsSpawn.Count)
+        if (scrapsSpawned.Count < socketsSpawn.Count)
         {
             return socketsSpawn[scrapsSpawned.Count].position;
         }
         else
         {
-            Vector3 tempPos = socketsSpawn[0].position;
-            Vector3 decal =  (Vector3.down * (socketsSpawn.Count % scrapsSpawned.Count + 1));
+            Vector3 tempPos = socketsSpawn[(scrapsSpawned.Count) % socketsSpawn.Count].position;
+            Vector3 decal = (Vector3.down * (scrapsSpawned.Count / socketsSpawn.Count));//socketsSpawn.Count % (scrapsSpawned.Count + 1)));
             Debug.Log(decal);// = Vector3.zero;
-            tempPos = Vector3.Scale(tempPos, (Vector3.down * (socketsSpawn.Count % scrapsSpawned.Count + 1)));
+            tempPos = tempPos + decal;
             return tempPos;
         }
+    }
+
+    private void DestroyAllScrap()
+    {
+        foreach (var item in scrapsSpawned.ToList())
+        {
+            Destroy(item.gameObject);
+        }
+        scrapsSpawned.Clear();
     }
 }
 

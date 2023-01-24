@@ -64,6 +64,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sizeItem: 0
+  isInHand: 0
+  canBeTakable: 1
+  defaultRotation: {x: 0, y: 0, z: 0}
 --- !u!65 &2521384001705452273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -138,7 +141,7 @@ MeshRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 73c176f402d2c2f4d929aa5da7585d17, type: 2}
+  - {fileID: 2100000, guid: 1e3b6ee60f9ce8249a7490ca29607b20, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
