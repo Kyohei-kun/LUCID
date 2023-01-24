@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2233520261779823600}
   - component: {fileID: 4115157088921382714}
   - component: {fileID: 6839563525453050635}
+  - component: {fileID: 4569473528145854721}
   m_Layer: 0
   m_Name: PR_Fonderie
   m_TagString: Untagged
@@ -114,6 +115,20 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!64 &4569473528145854721
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2457564489725857519}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -2308447066170391500, guid: 8763dbaa9616c9f4b9925903b9555c22, type: 3}
 --- !u!1 &3376129824430347193
 GameObject:
   m_ObjectHideFlags: 0
