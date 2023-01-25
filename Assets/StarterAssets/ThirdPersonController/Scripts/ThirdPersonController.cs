@@ -18,6 +18,9 @@ namespace StarterAssets
 
     public class ThirdPersonController : MonoBehaviour
     {
+        [SerializeField] float planeGravityMultiplayer;
+        float currentPlaneMultiplayer = 1;
+
         [SerializeField] private CS_UIManager UI_Manager;
         [SerializeField] CS_Island island;
         [SerializeField] CS_PlayerTriggerItem playerTriggerItem;
@@ -44,7 +47,7 @@ namespace StarterAssets
         public float RotationSmoothTime = 0.12f;
 
         [Tooltip("Acceleration and deceleration")]
-        public float SpeedChangeRate = 10.0f;
+        public float SpeedChangeRate = 10;
 
         public AudioClip LandingAudioClip;
         public AudioClip[] FootstepAudioClips;
@@ -110,16 +113,16 @@ namespace StarterAssets
         private float _fallTimeoutDelta;
 
         // animation IDs
-        private int _animIDSpeed;
-        private int _animIDGrounded;
-        private int _animIDJump;
-        private int _animIDFreeFall;
-        private int _animIDMotionSpeed;
+        private string _animIDSpeed;
+        private string _animIDGrounded;
+        private string _animIDJump;
+        private string _animIDFreeFall;
+        private string _animIDMotionSpeed;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
 #endif
-        private Animator _animator;
+        [SerializeField] private Animator _animator;
         private CharacterController _controller;
         private StarterAssetsInputs _input;
         private GameObject _mainCamera;
@@ -154,7 +157,7 @@ namespace StarterAssets
         {
             _cinemachineTargetYaw = CinemachineCameraTarget.transform.rotation.eulerAngles.y;
 
-            _hasAnimator = TryGetComponent(out _animator);
+            //_hasAnimator = TryGetComponent(out _animator);
             _controller = GetComponent<CharacterController>();
             _input = GetComponent<StarterAssetsInputs>();
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
@@ -174,7 +177,13 @@ namespace StarterAssets
 
         private void Update()
         {
-            _hasAnimator = TryGetComponent(out _animator);
+            //_hasAnimator = TryGetComponent(out _animator);
+            if (_animator != null)
+            {
+                _hasAnimator = true;
+            }
+            else
+                _hasAnimator = false;
 
             JumpAndGravity();
             GroundedCheck();
@@ -204,11 +213,11 @@ namespace StarterAssets
 
         private void AssignAnimationIDs()
         {
-            _animIDSpeed = Animator.StringToHash("Speed");
-            _animIDGrounded = Animator.StringToHash("Grounded");
-            _animIDJump = Animator.StringToHash("Jump");
-            _animIDFreeFall = Animator.StringToHash("FreeFall");
-            _animIDMotionSpeed = Animator.StringToHash("MotionSpeed");
+            _animIDSpeed = "Speed";
+            _animIDGrounded = "Grounded";
+            _animIDJump = "Jump";
+            _animIDFreeFall = "FreeFall";
+            _animIDMotionSpeed = "MotionSpeed";
         }
 
         private void GroundedCheck()
@@ -280,7 +289,7 @@ namespace StarterAssets
                 _speed = targetSpeed;
             }
 
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed, Time.deltaTime * SpeedChangeRate);
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed/6, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
@@ -307,16 +316,30 @@ namespace StarterAssets
             _controller.Move(thirdPersonMoveCalculated);
 
 
-            // update animator if using character
-            if (_hasAnimator)
-            {
-                _animator.SetFloat(_animIDSpeed, _animationBlend);
-                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
-            }
+            // update animator if using character                                     
+            if (_hasAnimator)                                                         
+            {                                                                         
+                _animator.SetFloat(_animIDSpeed, _animationBlend);                    
+                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);               
+            }                                                                         
         }
 
         private void JumpAndGravity()
         {
+            if (Input.GetKey(KeyCode.Space) && Grounded == false)
+            {
+                if(_verticalVelocity < 0)
+                {
+                currentPlaneMultiplayer = planeGravityMultiplayer;
+                    _animator.SetBool("Plane", true);
+                }
+            }
+            else
+            {
+                currentPlaneMultiplayer = 1;
+                _animator.SetBool("Plane", false);
+            }
+
             if (Grounded)
             {
                 // reset the fall timeout timer
@@ -377,10 +400,12 @@ namespace StarterAssets
                 _input.jump = false;
             }
 
+           
+
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
             {
-                _verticalVelocity += Gravity * Time.deltaTime;
+                _verticalVelocity += Gravity * Time.deltaTime * currentPlaneMultiplayer;
             }
         }
 
