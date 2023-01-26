@@ -49,15 +49,15 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BlueTX:
-        m_Texture: {fileID: 2800000, guid: a74698c2ae59e3c41a00720e6825b9e3, type: 3}
+        m_Texture: {fileID: 2800000, guid: b77f5b1c1e9db0541afb19ab60c08713, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _GreenTX:
-        m_Texture: {fileID: 2800000, guid: 6bc4f90d301c165449929be4e76ac175, type: 3}
+        m_Texture: {fileID: 2800000, guid: be3e1592177681343805d6a73a422562, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RedTX:
-        m_Texture: {fileID: 2800000, guid: 48f4f4aa04e323e4c9d01b4e02550db3, type: 3}
+        m_Texture: {fileID: 2800000, guid: be3e1592177681343805d6a73a422562, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -80,9 +80,9 @@ Material:
     - _AlphaSrcBlend: 1
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
-    - _Base_Tile: 1
+    - _Base_Tile: 14.6
     - _BlendMode: 0
-    - _Blue_Tile: 7.8
+    - _Blue_Tile: 20
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -91,18 +91,18 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _Edge_1: -0.04
+    - _Edge_1: 0.1
     - _Edge_2: 0.71
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
     - _Green_Tile: 9.03
-    - _Metallic: 1
-    - _Noise_Size_Param: 521.55
+    - _Metallic: 0
+    - _Noise_Size_Param: 500
     - _OpaqueCullMode: 2
     - _RayTracing: 0
     - _ReceivesSSR: 1
     - _ReceivesSSRTransparent: 0
-    - _Red_Tile: 1
+    - _Red_Tile: 5
     - _RefractionModel: 0
     - _RenderQueueType: 1
     - _RequireSplitLighting: 0
@@ -136,7 +136,7 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Tint_Base: {r: 1, g: 1, b: 1, a: 0}
-    - _Tint_Blue: {r: 1, g: 1, b: 1, a: 0}
-    - _Tint_Green: {r: 0.55891776, g: 0.6845268, b: 0.754717, a: 0}
-    - _Tint_Red: {r: 0.59607846, g: 0.59607846, b: 0.59607846, a: 1}
+    - _Tint_Blue: {r: 0.46938288, g: 0.5188679, b: 0.43810073, a: 0}
+    - _Tint_Green: {r: 0.11814703, g: 0.41740316, b: 0.4245283, a: 0}
+    - _Tint_Red: {r: 0.5283019, g: 0.5208259, b: 0.5208259, a: 1}
   m_BuildTextureStacks: []
