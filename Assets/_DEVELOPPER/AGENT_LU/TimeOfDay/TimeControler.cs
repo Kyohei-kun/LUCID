@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using System;
 using System.Collections.Specialized;
+using UnityEngine.Rendering;
 
 public class TimeControler : MonoBehaviour
 {
@@ -18,6 +19,8 @@ public class TimeControler : MonoBehaviour
 
     [SerializeField]
     private Light sunLight;
+
+    public Volume SkyandFog;
 
     [SerializeField]
     private float sunriseHour;
@@ -80,7 +83,9 @@ public class TimeControler : MonoBehaviour
     private void RotateSun()
     {
         float sunLightRotation;
+       
 
+        // DAY -------------------------------
         if(currentTime.TimeOfDay > sunriseTime && currentTime.TimeOfDay < sunsetTime)
         {
             TimeSpan sunriseToSunsetDuration = CalculateTimeDifference(sunriseTime, sunsetTime);
@@ -92,6 +97,8 @@ public class TimeControler : MonoBehaviour
 
         }
 
+
+        // NIGHT -----------------------
         else
         {
             TimeSpan sunsetToSunriseDuration = CalculateTimeDifference(sunsetTime, sunriseTime);
