@@ -135,8 +135,8 @@ Material:
     m_Colors:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Tint_Base: {r: 1, g: 1, b: 1, a: 0}
+    - _Tint_Base: {r: 0.0024029901, g: 0.05660379, b: 0.024535201, a: 1}
     - _Tint_Blue: {r: 0.5176471, g: 0.45918795, b: 0.4392157, a: 0}
-    - _Tint_Green: {r: 0.11814703, g: 0.41740316, b: 0.4245283, a: 0}
-    - _Tint_Red: {r: 0.5283019, g: 0.5208259, b: 0.5208259, a: 1}
+    - _Tint_Green: {r: 0.46422216, g: 0.6037736, b: 0.5359912, a: 0}
+    - _Tint_Red: {r: 0.29472232, g: 0.3490566, b: 0.3490566, a: 1}
   m_BuildTextureStacks: []

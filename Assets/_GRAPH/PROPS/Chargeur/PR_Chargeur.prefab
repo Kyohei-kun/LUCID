@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 9136949833621402791}
   - component: {fileID: 5288119743308266242}
   - component: {fileID: 7964575990956330952}
+  - component: {fileID: 2641051286514548273}
   m_Layer: 0
   m_Name: PR_Chargeur
   m_TagString: Untagged
@@ -84,6 +85,20 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!64 &2641051286514548273
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8468781442910989853}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 7589278685302312199, guid: 8da42ca1709ca514e8e7477a068808b5, type: 3}
 --- !u!1001 &8339005789708584673
 PrefabInstance:
   m_ObjectHideFlags: 0
