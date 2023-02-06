@@ -289,7 +289,7 @@ namespace StarterAssets
                 _speed = targetSpeed;
             }
 
-            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed/6, Time.deltaTime * SpeedChangeRate);
+            _animationBlend = Mathf.Lerp(_animationBlend, targetSpeed / 6, Time.deltaTime * SpeedChangeRate);
             if (_animationBlend < 0.01f) _animationBlend = 0f;
 
             // normalise input direction
@@ -317,21 +317,28 @@ namespace StarterAssets
 
 
             // update animator if using character                                     
-            if (_hasAnimator)                                                         
-            {                                                                         
-                _animator.SetFloat(_animIDSpeed, _animationBlend);                    
-                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);               
-            }                                                                         
+            if (_hasAnimator)
+            {
+                _animator.SetFloat(_animIDSpeed, _animationBlend);
+                _animator.SetFloat(_animIDMotionSpeed, inputMagnitude);
+            }
         }
 
         private void JumpAndGravity()
         {
             if (Input.GetKey(KeyCode.Space) && Grounded == false)
             {
-                if(_verticalVelocity < 0)
+                if (_verticalVelocity < 0)
                 {
-                currentPlaneMultiplayer = planeGravityMultiplayer;
+                    currentPlaneMultiplayer = planeGravityMultiplayer;
                     _animator.SetBool("Plane", true);
+
+                    if (itemsInHand.Count > 0)
+                    {
+                        itemsInHand[0].Dropped();//Items
+                        itemsInHand.Clear();
+                        _animator.SetFloat("HaveItem", 0);
+                    }
                 }
             }
             else
@@ -400,7 +407,7 @@ namespace StarterAssets
                 _input.jump = false;
             }
 
-           
+
 
             // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
             if (_verticalVelocity < _terminalVelocity)
@@ -465,12 +472,14 @@ namespace StarterAssets
                     {
                         itemsInHand.Add(currentItem);
                         currentItem.Taked(socketMiddle);
+                        _animator.SetFloat("HaveItem", 1);
                     }
                 }
                 else
                 {
                     itemsInHand[0].Dropped();
                     itemsInHand.Clear();
+                    _animator.SetFloat("HaveItem", 0);
                 }
             }
         }
