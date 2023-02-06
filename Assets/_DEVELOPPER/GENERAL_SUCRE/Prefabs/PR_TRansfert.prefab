@@ -49,6 +49,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isIndestructible: 0
   EU_By_Second: 40
+  animator: {fileID: 7992876154313657869}
+  visuelRender: {fileID: 1692186738726787818}
+  sourceMaterial: {fileID: 2100000, guid: faa1ca0bab9024049acbc7545833504d, type: 2}
 --- !u!1001 &2131462097
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -119,7 +122,7 @@ PrefabInstance:
     - target: {fileID: 7992876155135183324, guid: 2dd39a45b61d810418a8bd820d233928,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1996711817434790929, guid: 2dd39a45b61d810418a8bd820d233928, type: 3}
@@ -127,6 +130,18 @@ PrefabInstance:
 --- !u!4 &518184450487492997 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 518184451444549204, guid: 2dd39a45b61d810418a8bd820d233928,
+    type: 3}
+  m_PrefabInstance: {fileID: 2131462097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &1692186738726787818 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 1692186740353424699, guid: 2dd39a45b61d810418a8bd820d233928,
+    type: 3}
+  m_PrefabInstance: {fileID: 2131462097}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &7992876154313657869 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7992876155135183324, guid: 2dd39a45b61d810418a8bd820d233928,
     type: 3}
   m_PrefabInstance: {fileID: 2131462097}
   m_PrefabAsset: {fileID: 0}
