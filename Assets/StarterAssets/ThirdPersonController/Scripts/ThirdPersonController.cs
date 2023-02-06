@@ -495,5 +495,14 @@ namespace StarterAssets
                 currentTrigger = trigger;
             }
         }
+        private void OnCollisionEnter(Collision collision)
+        {
+            Debug.Log("Fire1");
+            if(collision.transform.tag == "Fire")
+            {
+                Debug.Log("Fire2");
+                GetComponent<Rigidbody>().AddForce(Vector3.up * 100);
+            }
+        }
     }
 }
