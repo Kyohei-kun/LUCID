@@ -38,18 +38,18 @@ public class TimeControler : MonoBehaviour
     private AnimationCurve lightChangeCurve;
 
     [SerializeField]
-    private float maxsunLightIntensity;
+    public float maxsunLightIntensity;
 
     [SerializeField]
     private Light moonLight;
 
     [SerializeField]
-    private float maxMoonLightIntensity;
+    public float maxMoonLightIntensity;
 
-    private DateTime currentTime;
-
-    private TimeSpan sunriseTime;
-    private TimeSpan sunsetTime;
+    [HideInInspector]
+    public DateTime currentTime;
+    public TimeSpan sunriseTime;
+    public TimeSpan sunsetTime;
 
     // Start is called before the first frame update
     void Start()
