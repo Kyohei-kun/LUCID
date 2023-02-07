@@ -9,6 +9,8 @@ TagManager:
   - Battery
   - ItemsParent
   - Item
+  - Fire
+  - WeatherManager
   layers:
   - Default
   - TransparentFX
