@@ -104,6 +104,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SecondaryIsland
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 56c50600d6d1c5547b85577619e840ce,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56c50600d6d1c5547b85577619e840ce, type: 3}
 --- !u!4 &7824230017848796277 stripped
