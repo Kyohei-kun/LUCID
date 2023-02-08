@@ -10,6 +10,7 @@ using System;
 using UnityEngine.Profiling;
 using static UnityEditor.Experimental.GraphView.GraphView;
 using static UnityEditor.Experimental.GraphView.Port;
+using UnityEngine.Rendering.LookDev;
 
 public class SC_WeatherChange : MonoBehaviour
 {
@@ -36,6 +37,17 @@ public class SC_WeatherChange : MonoBehaviour
     private bool Day;
     private bool Night;
 
+    private float cloudOpacityR;
+    private float cloudOpacityG;
+    private float cloudOpacityB;
+    private float cloudOpacityA;
+    private float cloudOpa;
+
+    private float BcloudOpacityR;
+    private float BcloudOpacityG;
+    private float BcloudOpacityB;
+    private float BcloudOpacityA;
+
 
     void Start()
     {
@@ -45,27 +57,59 @@ public class SC_WeatherChange : MonoBehaviour
 
     void Update()
     {
-
-
-        if ( hoursReport.currentTime.Minute > hoursReport.sunriseTime.Minutes && hoursReport.currentTime.Minute < hoursReport.sunsetTime.Minutes)
+        if (!cloudProfile.TryGet<CloudLayer>(out var cloud))
         {
-            Day = true;
+            cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
-       else
+        cloudOpa = cloud.opacity.value;
+        cloudOpacityR = cloud.layerA.opacityR.value;
+        cloudOpacityG = cloud.layerA.opacityG.value;
+        cloudOpacityB = cloud.layerA.opacityB.value;
+        cloudOpacityA = cloud.layerA.opacityA.value;
+
+        BcloudOpacityR = cloud.layerB.opacityR.value;
+        BcloudOpacityG = cloud.layerB.opacityG.value;
+        BcloudOpacityB = cloud.layerB.opacityB.value;
+        BcloudOpacityA = cloud.layerB.opacityA.value;
+
+
+        if ( hoursReport.currentTime.Hour > hoursReport.sunriseTime.Hours && hoursReport.currentTime.Hour < hoursReport.sunsetTime.Hours)
+        {
+            Day = true;
+            Night = false;
+
+            if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+            {
+                sky = cloudProfile.Add<PhysicallyBasedSky>(false);
+            }
+
+            sky.groundColorTexture = new CubemapParameter(sky.groundColorTexture.value, false);
+            sky.groundEmissionTexture = new CubemapParameter(sky.groundColorTexture.value, false);
+            sky.spaceEmissionTexture = new CubemapParameter(sky.groundColorTexture.value, false);
+            sky.spaceEmissionMultiplier.value = 0f;
+
+        }
+
+        else
         {
             Night = true;
+            Day = false;
+
         }
 
         if (weatherReport.WeatherState == Weather.Rainy)
         {
             Rain = true;
+            
+
 
         }
 
         if (weatherReport.WeatherState == Weather.Stormy)
         {
             Storm = true;
+            
 
         }
 
@@ -76,36 +120,36 @@ public class SC_WeatherChange : MonoBehaviour
 
         }
 
-        if (Day == true && Rain == false && Storm == false)
+        if (Day == true && Rain == false && Storm == false && Night == false)
         {
             SunnyDay();
 
         }
 
-        if (Night == true && Rain == false && Storm == false)
+        if (Night == true && Rain == false && Storm == false && Day == false)
         {
             StarryNight();
         }
 
-        if (Rain == true && Day == true && Storm == false)
+        if (Rain == true && Day == true && Storm == false && Night == false)
         {
             RainyDay();
 
         }
 
-        if (Rain == true && Night == true && Storm == false)
+        if (Rain == true && Night == true && Storm == false && Day == false )
         {
             RainyNight();
 
         }
 
-        if (Storm == true && Day == true && Rain == false)
+        if (Storm == true && Day == true && Rain == false && Night == false)
         {
             StormDay();
 
         }
 
-        if (Storm == true && Night == true && Rain == false)
+        if (Storm == true && Night == true && Rain == false && Day == false)
         {
             StormNight();
 
@@ -120,20 +164,22 @@ public class SC_WeatherChange : MonoBehaviour
             cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
-        cloud.opacity.value = 0.6f;
-        cloud.layerA.opacityR.value = 0.4f;
-        cloud.layerA.opacityG.value = 0f;
-        cloud.layerA.opacityB.value = 0F;
-        cloud.layerA.opacityA.value = 0f;
+        cloud.opacity.value = Mathf.Lerp(cloudOpa, 0.6f, 0.1f);
+        cloud.layerA.opacityR.value = Mathf.Lerp(cloudOpacityR, 0.4f, 0.1f);
+        cloud.layerA.opacityG.value = Mathf.Lerp(cloudOpacityG,0f, 0.1f);
+        cloud.layerA.opacityB.value = Mathf.Lerp(cloudOpacityB,0f, 0.1f);
+        cloud.layerA.opacityA.value = Mathf.Lerp(cloudOpacityA,0f, 0.1f);
 
-        cloud.layerB.opacityR.value = 0f;
-        cloud.layerB.opacityG.value = 0f;
-        cloud.layerB.opacityB.value = 0f;
-        cloud.layerB.opacityA.value = 0f;
+        cloud.layerB.opacityR.value = Mathf.Lerp(BcloudOpacityR,0f ,0.1f);
+        cloud.layerB.opacityG.value = Mathf.Lerp(BcloudOpacityG,0f,0.1f);
+        cloud.layerB.opacityB.value = Mathf.Lerp(BcloudOpacityB,0f,0.1f);
+        cloud.layerB.opacityA.value = Mathf.Lerp(BcloudOpacityA,0f,0.1f);
 
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxsunLightIntensity = 10f;
+        Debug.Log("Day");
+
     }
 
     private void StarryNight()
@@ -143,20 +189,32 @@ public class SC_WeatherChange : MonoBehaviour
             cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
-        cloud.opacity.value = 0.4f;
-        cloud.layerA.opacityR.value = 0.04f;
-        cloud.layerA.opacityG.value = 0f;
-        cloud.layerA.opacityB.value = 0f;
-        cloud.layerA.opacityA.value = 0f;
+        cloud.opacity.value = Mathf.Lerp(cloudOpa, 0f,0.1f) ;
+        cloud.layerA.opacityR.value = Mathf.Lerp(cloudOpacityR, 0f,0.1f);
+        cloud.layerA.opacityG.value = Mathf.Lerp(cloudOpacityG, 0f,0.1f);
+        cloud.layerA.opacityB.value = Mathf.Lerp(cloudOpacityB, 0f,0.1f);
+        cloud.layerA.opacityA.value = Mathf.Lerp(cloudOpacityA, 0f,0.1f);
 
-        cloud.layerB.opacityR.value = 0f;
-        cloud.layerB.opacityG.value = 0f;
-        cloud.layerB.opacityB.value = 0f;
-        cloud.layerB.opacityA.value = 0f;
+        cloud.layerB.opacityR.value = Mathf.Lerp(BcloudOpacityR, 0f,0.1f);
+        cloud.layerB.opacityG.value = Mathf.Lerp(BcloudOpacityG, 0f,0.1f);
+        cloud.layerB.opacityB.value = Mathf.Lerp(BcloudOpacityB, 0f,0.1f);
+        cloud.layerB.opacityA.value = Mathf.Lerp(BcloudOpacityA, 0f,0.1f);
 
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxMoonLightIntensity = 4f;
+        Debug.Log("Night");
+
+        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+        {
+            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
+        }
+
+
+        sky.groundEmissionTexture = new CubemapParameter(sky.groundColorTexture.value, true);
+        sky.groundColorTexture = new CubemapParameter(sky.groundColorTexture.value, true);
+        sky.spaceEmissionTexture = new CubemapParameter(sky.groundColorTexture.value, true);
+        sky.spaceEmissionMultiplier.value = 10f;
     }
 
 
@@ -169,19 +227,23 @@ public class SC_WeatherChange : MonoBehaviour
             cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
-        cloud.opacity.value = 1f;
-        cloud.layerA.opacityR.value = 1f;
-        cloud.layerA.opacityG.value = 1f;
-        cloud.layerA.opacityB.value = 1f;
-        cloud.layerA.opacityA.value = 1f;
+        cloud.opacity.value = Mathf.Lerp(cloudOpa, 1f,0.1f);
+        cloud.layerA.opacityR.value = Mathf.Lerp(cloudOpacityR, 1f,0.1f);
+        cloud.layerA.opacityG.value = Mathf.Lerp(cloudOpacityG, 1f,0.1f);
+        cloud.layerA.opacityB.value = Mathf.Lerp(cloudOpacityB, 1f,0.1f);
+        cloud.layerA.opacityA.value = Mathf.Lerp(cloudOpacityA, 1f,0.1f);
 
-        cloud.layerB.opacityR.value = 1f;
-        cloud.layerB.opacityG.value = 0.6f;
-        cloud.layerB.opacityB.value = 0.164f;
-        cloud.layerB.opacityA.value = 0f;
+        cloud.layerB.opacityR.value = Mathf.Lerp(BcloudOpacityR, 1f,0.1f);
+        cloud.layerB.opacityG.value = Mathf.Lerp(BcloudOpacityG, 0.6f,0.1f);
+        cloud.layerB.opacityB.value = Mathf.Lerp(BcloudOpacityB, 0.164f,0.1f);
+        cloud.layerB.opacityA.value = Mathf.Lerp(BcloudOpacityA, 0f,0.1f);
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxsunLightIntensity = 10f;
+
+        Debug.Log("RainyDay");
+
+
     }
 
 
@@ -192,20 +254,24 @@ public class SC_WeatherChange : MonoBehaviour
             cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
-        cloud.opacity.value = 0.61f;
-        cloud.layerA.opacityR.value = 1f;
-        cloud.layerA.opacityG.value = 1f;
-        cloud.layerA.opacityB.value = 1f;
-        cloud.layerA.opacityA.value = 1f;
+        cloud.opacity.value = Mathf.Lerp(cloudOpa, 0.61f,0.1f);
+        cloud.layerA.opacityR.value = Mathf.Lerp(cloudOpacityR, 1f,0.1f);
+        cloud.layerA.opacityG.value = Mathf.Lerp(cloudOpacityG, 1f,0.1f);
+        cloud.layerA.opacityB.value = Mathf.Lerp(cloudOpacityB, 1f,0.1f);
+        cloud.layerA.opacityA.value = Mathf.Lerp(cloudOpacityA, 1f, 0.1f);
 
-        cloud.layerB.opacityR.value = 0f;
-        cloud.layerB.opacityG.value = 0f;
-        cloud.layerB.opacityB.value = 0f;
-        cloud.layerB.opacityA.value = 1f;
+        cloud.layerB.opacityR.value = Mathf.Lerp(BcloudOpacityR, 0f,0.1f);
+        cloud.layerB.opacityG.value = Mathf.Lerp(BcloudOpacityG, 0f,0.1f);
+        cloud.layerB.opacityB.value = Mathf.Lerp(BcloudOpacityB, 0f,0.1f);
+        cloud.layerB.opacityA.value = Mathf.Lerp(BcloudOpacityA, 1f,0.1f);
 
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudB;
         hoursReport.maxMoonLightIntensity = 4f;
+
+        Debug.Log("RainyNight");
+
+        
 
     }
 
@@ -218,20 +284,22 @@ public class SC_WeatherChange : MonoBehaviour
             cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
-        cloud.opacity.value = 1f;
-        cloud.layerA.opacityR.value = 1f;
-        cloud.layerA.opacityG.value = 1f;
-        cloud.layerA.opacityB.value = 1f;
-        cloud.layerA.opacityA.value = 1f;
+        cloud.opacity.value = Mathf.Lerp(cloudOpa, 1f, 0.1f);
+        cloud.layerA.opacityR.value = Mathf.Lerp(cloudOpacityR, 1f,0.1f);
+        cloud.layerA.opacityG.value = Mathf.Lerp(cloudOpacityG,1f,0.1f);
+        cloud.layerA.opacityB.value = Mathf.Lerp(cloudOpacityB, 1f,0.1f);
+        cloud.layerA.opacityA.value = Mathf.Lerp(cloudOpacityA, 1f,0.1f);
 
-        cloud.layerB.opacityR.value = 0f;
-        cloud.layerB.opacityG.value = 0f;
-        cloud.layerB.opacityB.value = 0f;
-        cloud.layerB.opacityA.value = 1f;
+        cloud.layerB.opacityR.value = Mathf.Lerp(BcloudOpacityR, 0f,0.1f);
+        cloud.layerB.opacityG.value = Mathf.Lerp(BcloudOpacityG, 0f,0.1f);
+        cloud.layerB.opacityB.value = Mathf.Lerp(BcloudOpacityB, 0f,0.1f);
+        cloud.layerB.opacityA.value = Mathf.Lerp(BcloudOpacityA, 1f,0.1f);
 
         cloud.layerA.tint.value = ColorcloudB;
         cloud.layerB.tint.value = ColorcloudB;
         hoursReport.maxsunLightIntensity = Mathf.Lerp(10f, 5f, 0.1f);
+
+        Debug.Log("StormDay");
     }
 
     private void StormNight()
@@ -241,20 +309,23 @@ public class SC_WeatherChange : MonoBehaviour
             cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
-        cloud.opacity.value = 1f;
-        cloud.layerA.opacityR.value = 1f;
-        cloud.layerA.opacityG.value = 1f;
-        cloud.layerA.opacityB.value = 1f;
-        cloud.layerA.opacityA.value = 1f;
+        cloud.opacity.value = Mathf.Lerp(cloudOpa, 1f,0.1f);
+        cloud.layerA.opacityR.value = Mathf.Lerp(cloudOpacityR, 1f,0.1f);
+        cloud.layerA.opacityG.value = Mathf.Lerp(cloudOpacityG, 1f,0.1f);
+        cloud.layerA.opacityB.value = Mathf.Lerp(cloudOpacityB, 1f,0.1f);
+        cloud.layerA.opacityA.value = Mathf.Lerp(cloudOpacityA, 1f,0.1f);
 
-        cloud.layerB.opacityR.value = 1f;
-        cloud.layerB.opacityG.value = 1f;
-        cloud.layerB.opacityB.value = 1f;
-        cloud.layerB.opacityA.value = 1f;
+        cloud.layerB.opacityR.value = Mathf.Lerp(BcloudOpacityR, 1f,0.1f);
+        cloud.layerB.opacityG.value = Mathf.Lerp(BcloudOpacityG, 1f,0.1f);
+        cloud.layerB.opacityB.value = Mathf.Lerp(BcloudOpacityB, 1f,0.1f);
+        cloud.layerB.opacityA.value = Mathf.Lerp(BcloudOpacityA, 1f,0.1f);
 
         cloud.layerA.tint.value = ColorcloudB;
         cloud.layerB.tint.value = ColorcloudB;
 
         hoursReport.maxMoonLightIntensity = Mathf.Lerp(4f, 0.5f, 0.1f);
+
+        Debug.Log("StormNight");
+
     }
 }

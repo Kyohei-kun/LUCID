@@ -61,7 +61,7 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
-    - _BottomLine: 0.69
+    - _BottomLine: 0.699
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 2
     - _CullModeForward: 2
@@ -71,10 +71,10 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 2
     - _DstBlend: 0
-    - _EMMIntensity: 0.96
+    - _EMMIntensity: 0.62
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _FresnelIntensity: 20.37
+    - _FresnelIntensity: 19.87
     - _Metallic: 0.4
     - _OpacityBlend: 0
     - _OpaqueCullMode: 2
@@ -99,8 +99,8 @@ Material:
     - _StencilWriteMaskMV: 40
     - _SupportDecals: 1
     - _SurfaceType: 0
-    - _TopForce: 2.02
-    - _TopLine: 0.64
+    - _TopForce: 2.98
+    - _TopLine: 0.627
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
