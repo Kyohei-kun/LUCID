@@ -239,7 +239,7 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerB.opacityA.value = Mathf.Lerp(BcloudOpacityA, 0f,0.1f);
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
-        hoursReport.maxsunLightIntensity = 10f;
+        hoursReport.maxsunLightIntensity = 8f;
 
         Debug.Log("RainyDay");
 
