@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -11,6 +12,7 @@ static public class CS_PilotManager
 
     static public GameObject island;
     static public PlayerInput playerInputIsland;
+
 
     static public void Initialisation()
     {
@@ -35,6 +37,7 @@ static public class CS_PilotManager
             playerInputIsland.enabled = false;
 
             playerInputIsland.enabled = true;
+            ChangePlayerTransparency(0.5f);
         }
         else if (newState == PlayerPilote.None)
         {
@@ -42,10 +45,23 @@ static public class CS_PilotManager
             playerInputIsland.enabled = false;
             
             playerInput.enabled = true;
+            ChangePlayerTransparency(1);
         }
-        
 
         playerPilote = newState;
+    }
+
+    static private void ChangePlayerTransparency(float transpancyValue)
+    {
+        foreach (var renderer in player.GetComponentsInChildren<Renderer>().ToList())
+        {
+            foreach (var item in renderer.materials.ToList())
+            {
+                Color color = item.color;
+                color.a = transpancyValue;
+                item.color = color;
+            }
+        }
     }
 }
 
