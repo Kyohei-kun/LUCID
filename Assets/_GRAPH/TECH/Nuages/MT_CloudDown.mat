@@ -67,19 +67,19 @@ Material:
     - _AlphaToMask: 0
     - _AlphaToMaskInspectorValue: 0
     - _BlendMode: 0
-    - _Cloud2scale: 10.9
-    - _CloudAlpha: 5.78
-    - _CloudPower: 0.99
-    - _CloudScale: 88.71
+    - _Cloud2scale: 13.77
+    - _CloudAlpha: 0.304
+    - _CloudPower: 1.273
+    - _CloudScale: 96.75
     - _CloudScale2: 193.6
-    - _CloudVector: 19.76
+    - _CloudVector: 1072.3
     - _ConservativeDepthOffsetEnable: 0
     - _CullMode: 0
     - _CullModeForward: 2
     - _DepthOffsetEnable: 0
     - _DoubleSidedEnable: 1
     - _DoubleSidedGIMode: 0
-    - _DoubleSidedNormalMode: 0
+    - _DoubleSidedNormalMode: 2
     - _DstBlend: 10
     - _EnableBlendModePreserveSpecularLighting: 0
     - _EnableFogOnTransparent: 1
@@ -111,7 +111,7 @@ Material:
     - _TransparentWritingMotionVec: 1
     - _TransparentZWrite: 1
     - _UseShadowThreshold: 0
-    - _VertexOffset: 34.5
+    - _VertexOffset: 227.16
     - _ZTestDepthEqualForOpaque: 4
     - _ZTestGBuffer: 4
     - _ZTestTransparent: 4
@@ -119,7 +119,7 @@ Material:
     m_Colors:
     - _Cloudspeed: {r: 0.005, g: 0.005, b: 0, a: 0}
     - _Cloudspeed2: {r: 0.01, g: 0.006, b: 0, a: 0}
-    - _Color: {r: 1024, g: 1024, b: 1024, a: 1}
-    - _DoubleSidedConstants: {r: -1, g: -1, b: -1, a: 0}
+    - _Color: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 1}
+    - _DoubleSidedConstants: {r: 1, g: 1, b: 1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
