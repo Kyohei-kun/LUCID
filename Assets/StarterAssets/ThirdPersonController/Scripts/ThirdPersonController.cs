@@ -202,6 +202,9 @@ namespace StarterAssets
                 GetComponent<CharacterController>().enabled = false;
             else
                 GetComponent<CharacterController>().enabled = true;
+            #region  .
+            Debug.LogWarning("GROSSESbites.gif");
+            #endregion
         }
 
         private void LateUpdate()
@@ -482,6 +485,9 @@ namespace StarterAssets
                     _animator.SetFloat("HaveItem", 0);
                 }
             }
+            #region _
+            Debug.LogError("!ERREUR PETITE BITE DETECTE!");
+            #endregion
         }
 
         #endregion
