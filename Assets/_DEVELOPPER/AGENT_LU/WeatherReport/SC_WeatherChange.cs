@@ -178,7 +178,7 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxsunLightIntensity = 10f;
-        Debug.Log("Day");
+        //Debug.Log("Day");
 
     }
 
@@ -203,7 +203,7 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxMoonLightIntensity = 4f;
-        Debug.Log("Night");
+        //Debug.Log("Night");
 
         if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
         {

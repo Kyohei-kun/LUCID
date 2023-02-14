@@ -202,9 +202,6 @@ namespace StarterAssets
                 GetComponent<CharacterController>().enabled = false;
             else
                 GetComponent<CharacterController>().enabled = true;
-            #region  .
-            Debug.LogWarning("GROSSESbites.gif");
-            #endregion
         }
 
         private void LateUpdate()
@@ -485,9 +482,6 @@ namespace StarterAssets
                     _animator.SetFloat("HaveItem", 0);
                 }
             }
-            #region _
-            Debug.LogError("!ERREUR PETITE BITE DETECTE!");
-            #endregion
         }
 
         #endregion
@@ -504,7 +498,7 @@ namespace StarterAssets
         private void OnCollisionEnter(Collision collision)
         {
             Debug.Log("Fire1");
-            if(collision.transform.tag == "Fire")
+            if (collision.transform.tag == "Fire")
             {
                 Debug.Log("Fire2");
                 GetComponent<Rigidbody>().AddForce(Vector3.up * 100);

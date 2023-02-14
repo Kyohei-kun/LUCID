@@ -8,9 +8,12 @@ public class CS_LOD_Manager : MonoBehaviour
     List<CS_LOD_Item> items;
     int indexCheck;
 
+    Transform player;
 
     private void Start()
     {
+        items = new List<CS_LOD_Item>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
         AddSubscriptionItems();
     }
 
@@ -20,19 +23,17 @@ public class CS_LOD_Manager : MonoBehaviour
         foreach (var item in temp)
         {
             items.Add(item.GetComponent<CS_LOD_Item>());
+            items[items.Count - 1].Player = player;
         }
     }
 
-    private void Update()
+    private void Update()//2 check per frame
     {
         items[indexCheck].ManualUpdate();
-        if (indexCheck == items.Count - 1)
-        {
-            indexCheck = 0;
-        }
-        else
-        {
-            indexCheck++;
-        }
+        items[(indexCheck+1)%items.Count].ManualUpdate();
+
+        indexCheck += 2;
+        if (indexCheck > items.Count) Debug.Log("EntireLoop " + Time.time);
+        indexCheck = indexCheck % items.Count;
     }
 }

@@ -11,5 +11,7 @@ public class CS_SecondaryIsland : MonoBehaviour
         GameObject temp = Instantiate(prefabsVisuel[Random.Range(0, prefabsVisuel.Count - 1)]);
         temp.transform.parent = transform;
         temp.transform.localPosition = Vector3.zero;
+        gameObject.SetActive(false);
+        //Destroy(this);
     }
 }

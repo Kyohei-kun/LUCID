@@ -11,6 +11,7 @@ TagManager:
   - Item
   - Fire
   - WeatherManager
+  - LOD_Item
   layers:
   - Default
   - TransparentFX
