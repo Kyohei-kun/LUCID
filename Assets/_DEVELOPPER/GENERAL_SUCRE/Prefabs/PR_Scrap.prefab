@@ -94,6 +94,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PR_Rouille_03
       objectReference: {fileID: 0}
+    - target: {fileID: 4898046408519912654, guid: 382c647f208252a408267eb4fe11a5ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 5238403168412718708, guid: 382c647f208252a408267eb4fe11a5ae,
         type: 3}
       propertyPath: m_RootOrder
@@ -168,6 +173,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PR_Rouille_01
+      objectReference: {fileID: 0}
+    - target: {fileID: 8381708937425522034, guid: 7731b30060606094dbea760d5f67c4ce,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 9158667367961024456, guid: 7731b30060606094dbea760d5f67c4ce,
         type: 3}
@@ -298,6 +308,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PR_Rouille_02
+      objectReference: {fileID: 0}
+    - target: {fileID: 5194320735471425848, guid: 6cbeeb6f4877aef4b9f5413e107f5503,
+        type: 3}
+      propertyPath: m_Layer
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6cbeeb6f4877aef4b9f5413e107f5503, type: 3}
