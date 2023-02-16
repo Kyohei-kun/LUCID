@@ -24,6 +24,7 @@ public class CS_LOD_Manager : MonoBehaviour
         {
             items.Add(item.GetComponent<CS_LOD_Item>());
             items[items.Count - 1].Player = player;
+            items[items.Count - 1].ManualUpdate();
         }
     }
 

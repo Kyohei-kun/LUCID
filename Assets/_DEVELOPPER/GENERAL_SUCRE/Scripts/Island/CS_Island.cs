@@ -88,7 +88,13 @@ public class CS_Island : MonoBehaviour
     [SerializeField] Transform controlCursor;
     [SerializeField] Transform currentCursor;
 
+    [Space(10)]
+    [Header("FX")]
+    [Space(5)]
+    [SerializeField] GameObject windFx;
+
     public bool IsDriving { get => isDriving; set => isDriving = value; }
+    public float CurrentBoost { get => currentBoost; set => currentBoost = value; }
 
     private void Start()
     {
@@ -108,9 +114,9 @@ public class CS_Island : MonoBehaviour
 
         }
 
-        if (forwardBackward == 0 && Mathf.Abs(currentBoost) < thresholdBoost && currentBoost == lastBoost)
+        if (forwardBackward == 0 && Mathf.Abs(CurrentBoost) < thresholdBoost && CurrentBoost == lastBoost)
         {
-            currentBoost = 0;
+            CurrentBoost = 0;
         }
 
         currentAltitude = transform.position.y;
@@ -128,19 +134,23 @@ public class CS_Island : MonoBehaviour
 
         if (forwardBackward > 0.5f)
         {
-            currentBoost += speedForwardCurve.Evaluate(timerBeginBoost);
+            CurrentBoost += speedForwardCurve.Evaluate(timerBeginBoost);
         }
         else if (forwardBackward < -0.5f)
         {
-            currentBoost -= speedForwardCurve.Evaluate(timerBeginBoost);
+            CurrentBoost -= speedForwardCurve.Evaluate(timerBeginBoost);
         }
 
-        currentBoost = Mathf.Clamp(currentBoost, -1, 1);
+        CurrentBoost = Mathf.Clamp(CurrentBoost, -1, 1);
+
+        windFx.SetActive(CurrentBoost > 0);
 
         UptadeAnimationWings();
 
+
+
         transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedMaxRotation);
-        transform.Translate(-transform.forward * currentBoost * Time.deltaTime * speedMaxBoost, Space.World);
+        transform.Translate(-transform.forward * CurrentBoost * Time.deltaTime * speedMaxBoost, Space.World);
 
         float slowMultiplicateur = 1;
 
@@ -168,11 +178,13 @@ public class CS_Island : MonoBehaviour
             timerBeginAltittude = 0;
         }
 
+        UpdateRollRotation();
+
         UpdateBarreRotation();
         UpdateAltimetre();
 
         lastAngleDirection = currentAngleDirection;
-        lastBoost = currentBoost;
+        lastBoost = CurrentBoost;
 
         timerBeginRotation += Time.deltaTime;
         timerBeginAltittude += Time.deltaTime;
@@ -181,16 +193,40 @@ public class CS_Island : MonoBehaviour
 
     private void UptadeAnimationWings()
     {
-        animatorWings.speed = Mathf.Abs(currentBoost);
+        animatorWings.speed = Mathf.Abs(CurrentBoost);
     }
 
     private void UpdateAltimetre()
     {
         float tempAlt = currentAltitude;
-        currentCursor.localRotation = Quaternion.Euler(tempAlt.Remap(20000,-20000, 0, 80), 90, 180);
+        currentCursor.localRotation = Quaternion.Euler(tempAlt.Remap(20000, -20000, 0, 80), 90, 180);
 
         float tempTargetAltitude = targetAltitude;
         controlCursor.localRotation = Quaternion.Euler(tempTargetAltitude.Remap(20000, -20000, 0, 80), 90, 0);
+    }
+
+    private void UpdateRollRotation()
+    {
+        //Debug.Log(transform.rotation.eulerAngles.y.Remap(0,360,-180,180));
+        Vector3 rot = transform.rotation.eulerAngles;
+
+        float t = Mathf.Clamp(currentAngleDirection, -1f, 1f).Remap(-1f, 1f, 0, 1);
+        //Debug.Log(t);
+
+        if (currentAngleDirection > 0)
+        {
+            t = t.Remap(0.5f, 1, 0, 1);
+            //Debug.Log("T = " + t + " degré " + Mathf.Lerp(0, 15, t));
+            rot.z = Mathf.Lerp(0, 5, t);
+            transform.localRotation = Quaternion.Euler(rot);
+        }
+        if (currentAngleDirection < 0)
+        {
+            t = t.Remap(0, 0.5f, 1, 0);
+            //Debug.Log("T = " + t + " degré " + Mathf.Lerp(360, 345, t));
+            rot.z = Mathf.Lerp(360, 355, t);
+            transform.localRotation = Quaternion.Euler(rot);
+        }
     }
 
     private void UpdateBarreRotation()

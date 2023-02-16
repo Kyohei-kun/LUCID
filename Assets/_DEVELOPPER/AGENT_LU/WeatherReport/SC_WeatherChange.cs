@@ -8,8 +8,8 @@ using UnityEngine.Rendering.HighDefinition;
 using System.Collections.Specialized;
 using System;
 using UnityEngine.Profiling;
-using static UnityEditor.Experimental.GraphView.GraphView;
-using static UnityEditor.Experimental.GraphView.Port;
+//using static UnityEditor.Experimental.GraphView.GraphView;
+//using static UnityEditor.Experimental.GraphView.Port;
 using UnityEngine.Rendering.LookDev;
 
 public class SC_WeatherChange : MonoBehaviour
@@ -241,7 +241,7 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxsunLightIntensity = 8f;
 
-        Debug.Log("RainyDay");
+        //Debug.Log("RainyDay");
 
 
     }
@@ -269,10 +269,7 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerB.tint.value = ColorcloudB;
         hoursReport.maxMoonLightIntensity = 4f;
 
-        Debug.Log("RainyNight");
-
-        
-
+        //Debug.Log("RainyNight");
     }
 
 

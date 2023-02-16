@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class CS_LOD_Item : MonoBehaviour
 {
+    [SerializeField] bool isCloud;
+    [SerializeField] Transform billBoardcloud;
+
     Transform player;
 
     [SerializedDictionary("Child", "Distance")]
@@ -16,6 +19,11 @@ public class CS_LOD_Item : MonoBehaviour
 
     public void ManualUpdate()
     {
+        if(isCloud)
+        {
+            billBoardcloud.LookAt(player);
+        }
+
         foreach (var item in prefabByDistance)
         {
             float d = Distance_P();
@@ -31,6 +39,7 @@ public class CS_LOD_Item : MonoBehaviour
                 break;
             }
         }
+
     }
 
     private float Distance_P()
