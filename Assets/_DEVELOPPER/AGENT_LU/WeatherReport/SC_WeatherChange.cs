@@ -11,6 +11,7 @@ using UnityEngine.Profiling;
 //using static UnityEditor.Experimental.GraphView.GraphView;
 //using static UnityEditor.Experimental.GraphView.Port;
 using UnityEngine.Rendering.LookDev;
+using Unity.VisualScripting;
 
 public class SC_WeatherChange : MonoBehaviour
 {
@@ -21,32 +22,34 @@ public class SC_WeatherChange : MonoBehaviour
     [SerializeField]
     public CS_WeatherManager weatherReport;
 
-    public Light nightLight;
-    public Light dayLight;
+    [SerializeField]
+    private Material DownClouds;
 
+    //Down Cloud Color
+    public Color DownCloud_Day, DownCloud_Night, DownCloud_RainyNight, DownCloud_StormyNight, DownCloud_RainyDay, DownCloud_StormyDay;
+    private Color ActualDColor;
+
+    //Time Controler Lights
+    public Light nightLight, dayLight;
+
+    //Sky and Fog Volume
     public Volume VolumeProfile;
     private VolumeProfile cloudProfile;
 
-    public Color ColorcloudA;
-    public Color ColorcloudB;
+    //Cloud Layer Color
+    public Color ColorcloudA, ColorcloudB;
 
+    //Boolean Weather
+    private bool Rain, Storm, Day, Night;
 
-    private bool Normal;
-    private bool Rain;
-    private bool Storm;
-    private bool Day;
-    private bool Night;
+    //Cloud Layer A Opacity
+    private float cloudOpacityR, cloudOpacityG, cloudOpacityA, cloudOpacityB, cloudOpa;
 
-    private float cloudOpacityR;
-    private float cloudOpacityG;
-    private float cloudOpacityB;
-    private float cloudOpacityA;
-    private float cloudOpa;
+    //Cloud Layer B Opacity
+    private float BcloudOpacityR, BcloudOpacityG, BcloudOpacityB, BcloudOpacityA;
 
-    private float BcloudOpacityR;
-    private float BcloudOpacityG;
-    private float BcloudOpacityB;
-    private float BcloudOpacityA;
+    //Grount Tint Color
+    public Color DayNightCloud, RainyDayCloud, RainyNightCloud, StormyNightCloud, StormyDayCloud;
 
 
     void Start()
@@ -72,6 +75,8 @@ public class SC_WeatherChange : MonoBehaviour
         BcloudOpacityG = cloud.layerB.opacityG.value;
         BcloudOpacityB = cloud.layerB.opacityB.value;
         BcloudOpacityA = cloud.layerB.opacityA.value;
+
+        DownClouds.SetColor("_Color", ActualDColor);
 
 
         if ( hoursReport.currentTime.Hour > hoursReport.sunriseTime.Hours && hoursReport.currentTime.Hour < hoursReport.sunsetTime.Hours)
@@ -164,6 +169,11 @@ public class SC_WeatherChange : MonoBehaviour
             cloud = cloudProfile.Add<CloudLayer>(false);
         }
 
+        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+        {
+            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
+        }
+
         cloud.opacity.value = Mathf.Lerp(cloudOpa, 0.6f, 0.1f);
         cloud.layerA.opacityR.value = Mathf.Lerp(cloudOpacityR, 0.4f, 0.1f);
         cloud.layerA.opacityG.value = Mathf.Lerp(cloudOpacityG,0f, 0.1f);
@@ -178,6 +188,11 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxsunLightIntensity = 10f;
+
+        sky.groundTint.value = DayNightCloud;
+
+        ActualDColor = DownCloud_Day;
+
         //Debug.Log("Day");
 
     }
@@ -187,6 +202,11 @@ public class SC_WeatherChange : MonoBehaviour
         if (!cloudProfile.TryGet<CloudLayer>(out var cloud))
         {
             cloud = cloudProfile.Add<CloudLayer>(false);
+        }
+
+        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+        {
+            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
         }
 
         cloud.opacity.value = Mathf.Lerp(cloudOpa, 0f,0.1f) ;
@@ -203,18 +223,16 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerA.tint.value = ColorcloudA;
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxMoonLightIntensity = 4f;
-        //Debug.Log("Night");
-
-        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
-        {
-            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
-        }
-
 
         sky.groundEmissionTexture = new CubemapParameter(sky.groundColorTexture.value, true);
         sky.groundColorTexture = new CubemapParameter(sky.groundColorTexture.value, true);
         sky.spaceEmissionTexture = new CubemapParameter(sky.groundColorTexture.value, true);
         sky.spaceEmissionMultiplier.value = 10f;
+        sky.groundTint.value = DayNightCloud;
+
+        ActualDColor = DownCloud_Night;
+
+        //Debug.Log("Night");
     }
 
 
@@ -225,6 +243,11 @@ public class SC_WeatherChange : MonoBehaviour
         if (!cloudProfile.TryGet<CloudLayer>(out var cloud))
         {
             cloud = cloudProfile.Add<CloudLayer>(false);
+        }
+
+        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+        {
+            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
         }
 
         cloud.opacity.value = Mathf.Lerp(cloudOpa, 1f,0.1f);
@@ -241,6 +264,9 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerB.tint.value = ColorcloudA;
         hoursReport.maxsunLightIntensity = 8f;
 
+        sky.groundTint.value = RainyDayCloud;
+
+        ActualDColor = DownCloud_RainyDay;
         //Debug.Log("RainyDay");
 
 
@@ -252,6 +278,11 @@ public class SC_WeatherChange : MonoBehaviour
         if (!cloudProfile.TryGet<CloudLayer>(out var cloud))
         {
             cloud = cloudProfile.Add<CloudLayer>(false);
+        }
+
+        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+        {
+            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
         }
 
         cloud.opacity.value = Mathf.Lerp(cloudOpa, 0.61f,0.1f);
@@ -269,6 +300,10 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerB.tint.value = ColorcloudB;
         hoursReport.maxMoonLightIntensity = 4f;
 
+        sky.groundTint.value = RainyNightCloud;
+
+        ActualDColor = DownCloud_RainyNight;
+
         //Debug.Log("RainyNight");
     }
 
@@ -279,6 +314,11 @@ public class SC_WeatherChange : MonoBehaviour
         if (!cloudProfile.TryGet<CloudLayer>(out var cloud))
         {
             cloud = cloudProfile.Add<CloudLayer>(false);
+        }
+
+        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+        {
+            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
         }
 
         cloud.opacity.value = Mathf.Lerp(cloudOpa, 1f, 0.1f);
@@ -296,7 +336,11 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerB.tint.value = ColorcloudB;
         hoursReport.maxsunLightIntensity = Mathf.Lerp(10f, 5f, 0.1f);
 
-        Debug.Log("StormDay");
+        sky.groundTint.value = StormyDayCloud;
+
+        ActualDColor = DownCloud_StormyDay;
+
+        //Debug.Log("StormDay");
     }
 
     private void StormNight()
@@ -304,6 +348,11 @@ public class SC_WeatherChange : MonoBehaviour
         if (!cloudProfile.TryGet<CloudLayer>(out var cloud))
         {
             cloud = cloudProfile.Add<CloudLayer>(false);
+        }
+
+        if (!cloudProfile.TryGet<PhysicallyBasedSky>(out var sky))
+        {
+            sky = cloudProfile.Add<PhysicallyBasedSky>(false);
         }
 
         cloud.opacity.value = Mathf.Lerp(cloudOpa, 1f,0.1f);
@@ -321,8 +370,10 @@ public class SC_WeatherChange : MonoBehaviour
         cloud.layerB.tint.value = ColorcloudB;
 
         hoursReport.maxMoonLightIntensity = Mathf.Lerp(4f, 0.5f, 0.1f);
+        sky.groundTint.value = StormyNightCloud;
 
-        Debug.Log("StormNight");
+        ActualDColor = DownCloud_StormyNight;
+        //Debug.Log("StormNight");
 
     }
 }
