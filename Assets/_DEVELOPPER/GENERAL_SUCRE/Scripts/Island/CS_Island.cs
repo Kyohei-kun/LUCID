@@ -87,11 +87,26 @@ public class CS_Island : MonoBehaviour
     [Space(5)]
     [SerializeField] Transform controlCursor;
     [SerializeField] Transform currentCursor;
+    bool changingAltitude;
+    bool LastChangeAltitude;
 
     [Space(10)]
     [Header("FX")]
     [Space(5)]
     [SerializeField] GameObject windFx;
+
+    [Space(10)]
+    [Header("FeedBack Movement")]
+    [Space(5)]
+
+    [SerializeField] float angleRotationFeedBack;
+    [SerializeField] float anglePitchClamp;
+    [SerializeField] AnimationCurve anglePitchCurve;
+    [SerializeField] AnimationCurve anglePitchCurveRecovery;
+    [SerializeField] float anglePitchSpeed;
+    [SerializeField] AnimationCurve _angleByDistance;
+
+    float startAltitude;
 
     public bool IsDriving { get => isDriving; set => isDriving = value; }
     public float CurrentBoost { get => currentBoost; set => currentBoost = value; }
@@ -147,8 +162,6 @@ public class CS_Island : MonoBehaviour
 
         UptadeAnimationWings();
 
-
-
         transform.Rotate(Vector3.up * currentAngleDirection * Time.deltaTime * speedMaxRotation);
         transform.Translate(-transform.forward * CurrentBoost * Time.deltaTime * speedMaxBoost, Space.World);
 
@@ -178,13 +191,14 @@ public class CS_Island : MonoBehaviour
             timerBeginAltittude = 0;
         }
 
-        UpdateRollRotation();
-
         UpdateBarreRotation();
         UpdateAltimetre();
 
+        UpdateRotationFeedBack();
+
         lastAngleDirection = currentAngleDirection;
         lastBoost = CurrentBoost;
+        LastChangeAltitude = changingAltitude;
 
         timerBeginRotation += Time.deltaTime;
         timerBeginAltittude += Time.deltaTime;
@@ -203,9 +217,48 @@ public class CS_Island : MonoBehaviour
 
         float tempTargetAltitude = targetAltitude;
         controlCursor.localRotation = Quaternion.Euler(tempTargetAltitude.Remap(20000, -20000, 0, 80), 90, 0);
+
+        if (Mathf.Abs(currentAltitude - targetAltitude) > 5 && changingAltitude == false)
+        {
+            changingAltitude = true;
+        }
+        else if (Mathf.Abs(currentAltitude - targetAltitude) < 5)
+        {
+            changingAltitude = false;
+        }
     }
 
-    private void UpdateRollRotation()
+    private float GetPitchRotationFeedBack(Quaternion quat)
+    {
+        float xRot = quat.eulerAngles.x;
+        float result = 0;
+        float deltaAlti = targetAltitude - currentAltitude;
+
+        if (changingAltitude == true && LastChangeAltitude == false)
+        {
+            startAltitude = transform.position.y;
+        }
+
+        if (changingAltitude)
+        {
+            float temp = transform.position.y.Remap(startAltitude, targetAltitude, 0, 1);
+            result = _angleByDistance.Evaluate(transform.position.y.Remap(startAltitude, targetAltitude, 0, 1));
+
+            if (deltaAlti < 0)
+            {
+                result = -result;
+            }
+        }
+
+        Quaternion targetQuaternion = Quaternion.Euler(result, quat.eulerAngles.y, quat.eulerAngles.z);
+
+        result = Quaternion.Lerp(quat, targetQuaternion, 0.01f).eulerAngles.x;
+
+        return result;
+    }
+
+
+    private void UpdateRotationFeedBack()
     {
         //Debug.Log(transform.rotation.eulerAngles.y.Remap(0,360,-180,180));
         Vector3 rot = transform.rotation.eulerAngles;
@@ -217,16 +270,16 @@ public class CS_Island : MonoBehaviour
         {
             t = t.Remap(0.5f, 1, 0, 1);
             //Debug.Log("T = " + t + " degré " + Mathf.Lerp(0, 15, t));
-            rot.z = Mathf.Lerp(0, 5, t);
-            transform.localRotation = Quaternion.Euler(rot);
+            rot.z = Mathf.Lerp(0, angleRotationFeedBack, t);
         }
         if (currentAngleDirection < 0)
         {
             t = t.Remap(0, 0.5f, 1, 0);
             //Debug.Log("T = " + t + " degré " + Mathf.Lerp(360, 345, t));
-            rot.z = Mathf.Lerp(360, 355, t);
-            transform.localRotation = Quaternion.Euler(rot);
+            rot.z = Mathf.Lerp(360, 360 - angleRotationFeedBack, t);
         }
+        rot.x = GetPitchRotationFeedBack(Quaternion.Euler(rot));
+        transform.localRotation = Quaternion.Euler(rot);
     }
 
     private void UpdateBarreRotation()
