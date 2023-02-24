@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 9178470835924503999}
   - component: {fileID: 6378378903576181109}
   - component: {fileID: 8977662827799714862}
+  - component: {fileID: 3057728346581726735}
   m_Layer: 0
   m_Name: PR_Other_Isle_2
   m_TagString: Untagged
@@ -4241,6 +4242,20 @@ MonoBehaviour:
   m_OriginalMeshObject: {fileID: -6097382932030662692, guid: 73e22234f239f1d4bb0d6fe9a0f87795,
     type: 3}
   m_Mode: 0
+--- !u!64 &3057728346581726735
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4865138436458109088}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: -6097382932030662692, guid: 73e22234f239f1d4bb0d6fe9a0f87795, type: 3}
 --- !u!1001 &707981625882569131
 PrefabInstance:
   m_ObjectHideFlags: 0

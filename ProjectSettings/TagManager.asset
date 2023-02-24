@@ -12,6 +12,7 @@ TagManager:
   - Fire
   - WeatherManager
   - LOD_Item
+  - WorldIslandParameter
   layers:
   - Default
   - TransparentFX

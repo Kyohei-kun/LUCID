@@ -414,13 +414,13 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 3
   groundTint:
-    m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
-  groundColorTexture:
     m_OverrideState: 1
+    m_Value: {r: 0.0129049495, g: 0.040049847, b: 0.09433961, a: 1}
+  groundColorTexture:
+    m_OverrideState: 0
     m_Value: {fileID: 8900000, guid: 3fa4dafb3f8198d459181b0e4f811b28, type: 3}
   groundEmissionTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 8900000, guid: 3fa4dafb3f8198d459181b0e4f811b28, type: 3}
   groundEmissionMultiplier:
     m_OverrideState: 0
@@ -429,11 +429,11 @@ MonoBehaviour:
     m_OverrideState: 1
     m_Value: {x: 0, y: 0, z: 0}
   spaceEmissionTexture:
-    m_OverrideState: 1
+    m_OverrideState: 0
     m_Value: {fileID: 8900000, guid: 3fa4dafb3f8198d459181b0e4f811b28, type: 3}
   spaceEmissionMultiplier:
     m_OverrideState: 1
-    m_Value: 10
+    m_Value: 0
   spaceRotation:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
@@ -474,7 +474,7 @@ MonoBehaviour:
   active: 1
   opacity:
     m_OverrideState: 1
-    m_Value: 5.706424e-18
+    m_Value: 0.99999976
   upperHemisphereOnly:
     m_OverrideState: 1
     m_Value: 1
@@ -502,22 +502,22 @@ MonoBehaviour:
       m_Value: {fileID: 2800000, guid: 57a33fc2476a01644865bfde5f06e2f4, type: 3}
     opacityR:
       m_OverrideState: 1
-      m_Value: 3.8042835e-18
+      m_Value: 0.99999976
     opacityG:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 0.99999976
     opacityB:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 0.99999976
     opacityA:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 0.99999976
     rotation:
       m_OverrideState: 1
       m_Value: 0
     tint:
       m_OverrideState: 1
-      m_Value: {r: 1, g: 1, b: 1, a: 0}
+      m_Value: {r: 0, g: 0, b: 0, a: 0}
     exposure:
       m_OverrideState: 1
       m_Value: 0
@@ -559,22 +559,22 @@ MonoBehaviour:
       m_Value: {fileID: 2800000, guid: 57a33fc2476a01644865bfde5f06e2f4, type: 3}
     opacityR:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 6e-45
     opacityG:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 6e-45
     opacityB:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 6e-45
     opacityA:
       m_OverrideState: 1
-      m_Value: 0
+      m_Value: 0.99999976
     rotation:
       m_OverrideState: 1
       m_Value: 0
     tint:
       m_OverrideState: 1
-      m_Value: {r: 1, g: 1, b: 1, a: 0}
+      m_Value: {r: 0, g: 0, b: 0, a: 0}
     exposure:
       m_OverrideState: 1
       m_Value: 0

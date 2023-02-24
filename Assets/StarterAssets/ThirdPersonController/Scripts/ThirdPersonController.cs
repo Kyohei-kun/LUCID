@@ -97,6 +97,7 @@ namespace StarterAssets
         public bool LockCameraPosition = false;
 
         [SerializeField] private float speedBubble;
+        [SerializeField] private float distanceTriggerBubble;
 
         // cinemachine
         private float _cinemachineTargetYaw;
@@ -432,7 +433,7 @@ namespace StarterAssets
                     // if we are not grounded, do not jump
                     _input.jump = false;
 
-                    if(transform.position.y < island.transform.position.y - 20)
+                    if(transform.position.y < island.transform.position.y - distanceTriggerBubble)
                     {
                         bubbleIsActive = true;
                         _animator.SetBool("IsBubble", true);
