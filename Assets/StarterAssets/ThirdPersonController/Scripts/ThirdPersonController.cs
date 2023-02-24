@@ -96,6 +96,8 @@ namespace StarterAssets
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+        [SerializeField] private float speedBubble;
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
@@ -118,6 +120,9 @@ namespace StarterAssets
         private string _animIDJump;
         private string _animIDFreeFall;
         private string _animIDMotionSpeed;
+
+        [SerializeField] private bool bubbleIsActive;
+        [SerializeField] private GameObject bubble;
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
         private PlayerInput _playerInput;
@@ -403,8 +408,36 @@ namespace StarterAssets
                     }
                 }
 
-                // if we are not grounded, do not jump
-                _input.jump = false;
+
+                
+                if (bubbleIsActive)
+                {
+                    //Debug.Log(_input.jump);
+                    _verticalVelocity = speedBubble;
+                    if(bubble.activeSelf == false)
+                    {
+                        bubble.SetActive(true);
+                        _animator.SetBool("IsBubble", true);
+                    }
+
+                    if (_input.jump || transform.position.y > island.transform.position.y + 20)
+                    {
+                        bubbleIsActive = false;
+                        bubble.SetActive(false);
+                        _animator.SetBool("IsBubble", false);
+                    }
+                }
+                else
+                {
+                    // if we are not grounded, do not jump
+                    _input.jump = false;
+
+                    if(transform.position.y < island.transform.position.y - 20)
+                    {
+                        bubbleIsActive = true;
+                        _animator.SetBool("IsBubble", true);
+                    } 
+                }
             }
 
 
