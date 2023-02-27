@@ -59,7 +59,7 @@ Material:
     - _DstBlend: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
-    - _Intensity: 1490
+    - _Intensity: 1200
     - _OnOff: 0
     - _OpaqueCullMode: 2
     - _RayTracing: 0
@@ -97,7 +97,7 @@ Material:
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _Off: {r: 0, g: 0, b: 0, a: 0}
-    - _On: {r: 0, g: 0.4634897, b: 25.028446, a: 0}
+    - _On: {r: 0, g: 0.262078, b: 12.514223, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &526822340629244909
 MonoBehaviour:
