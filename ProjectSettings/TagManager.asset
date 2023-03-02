@@ -13,6 +13,7 @@ TagManager:
   - WeatherManager
   - LOD_Item
   - WorldIslandParameter
+  - IA_Manager
   layers:
   - Default
   - TransparentFX
