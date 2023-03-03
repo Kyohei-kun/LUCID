@@ -7,21 +7,42 @@ public class CS_Wyrve : MonoBehaviour
 {
     //Debug 
     [ShowNonSerializedField] private string nameCurrentState;
+    bool drawGizmos = false;
+    bool notDrawGizmos => !drawGizmos;
+    bool showTrail = false;
+    bool notShowTrail => !showTrail;
+    TrailRenderer trail;
 
     private CS_IA_Manager manager;
     private CS_I_State currentState;
     private CS_I_State lastState;
-    private float distancePlayer;
+    private float distancePlayer = 1000000;
     private Vector3 startPosition;
 
+    public delegate void DelegateGizmo();
+    public List<DelegateGizmo> gizmoDelegate;
+
+    [HorizontalLine(color: EColor.Blue)]
     [BoxGroup("IA")] [SerializeField] float radiusZone;
     [BoxGroup("IA")] [SerializeField] float disctanceTriggerPlayer;
 
-    [BoxGroup("Mouvements")] [SerializeField] float smoothReturnMove;
-    [BoxGroup("Mouvements")] [SerializeField] float speed;
-    [BoxGroup("Mouvements")] [SerializeField] float amplitude;
-    [BoxGroup("Mouvements")] [SerializeField] float frequency;
 
+    [HorizontalLine(color: EColor.Blue)]
+    [BoxGroup("Patrouille")] [SerializeField] float smoothReturnMove;
+    [BoxGroup("Patrouille")] [SerializeField] float speed;
+    [BoxGroup("Patrouille")] [SerializeField] float amplitude;
+    [BoxGroup("Patrouille")] [SerializeField] float frequency;
+
+    [HorizontalLine(color: EColor.Blue)]
+    [Range(0, 1)]
+    [BoxGroup("PrepareAttack")] [SerializeField] float smoothAdjustement;
+    [BoxGroup("PrepareAttack")] [SerializeField] float angleRise;
+
+    [HorizontalLine(color: EColor.Blue)]
+    [BoxGroup("Animation")] [SerializeField] Animator animator;
+
+
+    #region GET|SET
     public float DistancePlayer { get => distancePlayer; set => distancePlayer = value; }
     public float SmoothReturnMove { get => smoothReturnMove; set => smoothReturnMove = value; }
     public float Speed { get => speed; set => speed = value; }
@@ -31,9 +52,10 @@ public class CS_Wyrve : MonoBehaviour
     public float Frequency { get => frequency; set => frequency = value; }
     public float RadiusZone { get => radiusZone; set => radiusZone = value; }
     public float DisctanceTriggerPlayer { get => disctanceTriggerPlayer; set => disctanceTriggerPlayer = value; }
-
-    public delegate void DelegateGizmo();
-    public List<DelegateGizmo> gizmoDelegate;
+    public Animator Animator { get => animator; set => animator = value; }
+    public float SmoothAdjustement { get => smoothAdjustement; set => smoothAdjustement = value; }
+    public float AngleRise { get => angleRise; set => angleRise = value; }
+    #endregion
 
     private void Start()
     {
@@ -42,6 +64,8 @@ public class CS_Wyrve : MonoBehaviour
         currentState = new CS_Patrouille();
         StartPosition = transform.position;
         gizmoDelegate = new List<DelegateGizmo>();
+        trail = GetComponentInChildren<TrailRenderer>();
+        trail.enabled = showTrail;
     }
 
     private void Update()
@@ -68,13 +92,16 @@ public class CS_Wyrve : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        if (gizmoDelegate != null && gizmoDelegate.Count > 0)
+        if (drawGizmos)
         {
-            foreach (var item in gizmoDelegate)
+            if (gizmoDelegate != null && gizmoDelegate.Count > 0)
             {
-                item();
+                foreach (var item in gizmoDelegate)
+                {
+                    item();
+                }
             }
         }
     }
@@ -83,4 +110,26 @@ public class CS_Wyrve : MonoBehaviour
     {
         distancePlayer = Vector3.Distance(transform.position, manager.GetPlayerGameObject().transform.position);
     }
+
+
+    [Button(enabledMode: EButtonEnableMode.Playmode)]
+    private void RewriteDistancePlayer() { distancePlayer = 0; }
+
+    //Gizmo Button
+    [ShowIf("notDrawGizmos")]
+    [Button()]
+    private void Activate_Gizmos() { drawGizmos = true; }
+
+    [ShowIf("drawGizmos")]
+    [Button()]
+    private void Desactivate_Gizmos() { drawGizmos = false; }
+
+    //Trail Button
+    [ShowIf("notShowTrail")]
+    [Button()]
+    private void Activate_Trail() { trail.enabled = showTrail = true; }
+
+    [ShowIf("showTrail")]
+    [Button()]
+    private void Desactivate_Trail() { trail.enabled = showTrail = false; }
 }

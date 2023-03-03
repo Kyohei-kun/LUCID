@@ -27,6 +27,7 @@ public class CS_Patrouille : MonoBehaviour, CS_I_State
         spawnPosition = parent.StartPosition;
         horizontalTargetDirection = Vector3.Scale(Random.insideUnitSphere, new Vector3(1, 0, 1)).normalized;
         this.parent = parent;
+        parent.Animator.SetBool("IsFly", true);
     }
 
     public void State_Update()
@@ -86,11 +87,11 @@ public class CS_Patrouille : MonoBehaviour, CS_I_State
 
     public CS_I_State State_Pass()
     {
-        parent.UpdatePlayerDistance();
         if(parent.DistancePlayer < parent.DisctanceTriggerPlayer)
         {
             return new CS_PrepareAttack();
         }
+        parent.UpdatePlayerDistance();
         return null;
     }
 
