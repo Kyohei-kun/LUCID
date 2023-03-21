@@ -18,6 +18,7 @@ public class CS_Wyrve : MonoBehaviour
     private CS_I_State lastState;
     private float distancePlayer = 1000000;
     private Vector3 startPosition;
+    private float speedFactorPique = 1;
 
     public delegate void DelegateGizmo();
     public List<DelegateGizmo> gizmoDelegate;
@@ -37,6 +38,7 @@ public class CS_Wyrve : MonoBehaviour
     [Range(0, 1)]
     [BoxGroup("PrepareAttack")] [SerializeField] float smoothAdjustement;
     [BoxGroup("PrepareAttack")] [SerializeField] float angleRise;
+    [BoxGroup("PrepareAttack")] [SerializeField] float height;
 
     [HorizontalLine(color: EColor.Blue)]
     [BoxGroup("Animation")] [SerializeField] Animator animator;
@@ -55,6 +57,8 @@ public class CS_Wyrve : MonoBehaviour
     public Animator Animator { get => animator; set => animator = value; }
     public float SmoothAdjustement { get => smoothAdjustement; set => smoothAdjustement = value; }
     public float AngleRise { get => angleRise; set => angleRise = value; }
+    public float Height { get => height; set => height = value; }
+    public float SpeedFactorPique { get => speedFactorPique; set => speedFactorPique = value; }
     #endregion
 
     private void Start()

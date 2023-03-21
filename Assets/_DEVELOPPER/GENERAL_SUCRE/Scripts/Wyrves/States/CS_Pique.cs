@@ -4,23 +4,36 @@ using UnityEngine;
 
 public class CS_Pique : MonoBehaviour, CS_I_State
 {
-    public void State_Finish()
+    CS_Wyrve parent;
+    GameObject target;
+    float startTime;
+
+    public void State_Start(CS_Wyrve parent)
     {
-        throw new System.NotImplementedException();
+        this.parent = parent;
+        target = GameObject.FindGameObjectWithTag("Target");
+        startTime = Time.time;
+        Debug.Log("Pique");
     }
 
     public CS_I_State State_Pass()
     {
-        throw new System.NotImplementedException();
-    }
+        if(Vector3.Distance(parent.transform.position, target.transform.position) < 50)
+        {
+            return new CS_Theft();
+        }
 
-    public void State_Start(CS_Wyrve parent)
+        return null;
+    }
+    public void State_Finish()
     {
-        throw new System.NotImplementedException();
     }
 
     public void State_Update()
     {
-        throw new System.NotImplementedException();
+        parent.SpeedFactorPique = Mathf.Clamp((Time.time - startTime), 1, 50000);
+        Quaternion quatTarget = Quaternion.LookRotation(target.transform.position - parent.transform.position);
+        parent.transform.rotation = Quaternion.Lerp(parent.transform.rotation, quatTarget, 0.1f);
+        parent.transform.Translate(parent.transform.forward * parent.Speed * Mathf.Clamp((Time.time - startTime), 1, 50000), Space.World);
     }
 }
