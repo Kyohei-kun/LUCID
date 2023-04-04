@@ -15,6 +15,7 @@ TagManager:
   - WorldIslandParameter
   - IA_Manager
   - Target
+  - Record
   layers:
   - Default
   - TransparentFX

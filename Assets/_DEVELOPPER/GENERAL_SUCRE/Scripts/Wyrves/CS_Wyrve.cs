@@ -12,6 +12,7 @@ public class CS_Wyrve : MonoBehaviour
     bool showTrail = false;
     bool notShowTrail => !showTrail;
     TrailRenderer trail;
+    bool drawDebugnextFrame = false;
 
     private CS_IA_Manager manager;
     private CS_I_State currentState;
@@ -75,6 +76,12 @@ public class CS_Wyrve : MonoBehaviour
     private void Update()
     {
         nameCurrentState = currentState.ToString();  //Debug currentState name
+        
+        if(drawDebugnextFrame)
+        {
+            Debug.Log(nameCurrentState);
+            drawDebugnextFrame = false;
+        }
 
         if (currentState != lastState)
         {
@@ -89,6 +96,7 @@ public class CS_Wyrve : MonoBehaviour
             currentState.State_Finish(); //■
             lastState = currentState;
             currentState = newState;
+            drawDebugnextFrame = true;
         }
         else
         {

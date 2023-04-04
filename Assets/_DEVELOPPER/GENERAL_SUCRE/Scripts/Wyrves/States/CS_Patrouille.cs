@@ -28,7 +28,6 @@ public class CS_Patrouille : MonoBehaviour, CS_I_State
         horizontalTargetDirection = Vector3.Scale(Random.insideUnitSphere, new Vector3(1, 0, 1)).normalized;
         this.parent = parent;
         parent.Animator.SetBool("IsFly", true);
-        Debug.Log("Patrouille");
     }
 
     public void State_Update()

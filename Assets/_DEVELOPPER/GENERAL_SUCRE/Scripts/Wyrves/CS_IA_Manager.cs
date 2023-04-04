@@ -6,6 +6,7 @@ public class CS_IA_Manager : MonoBehaviour
 {
     List<CS_Wyrve> wyrves;
     GameObject player;
+    Transform mainIsland;
 
     public void Subscribe(CS_Wyrve wyrve)
     {
@@ -22,5 +23,14 @@ public class CS_IA_Manager : MonoBehaviour
             player = GameObject.FindGameObjectWithTag("Player");
         }
         return player;
+    }
+
+    public Transform GetMainIsland()
+    {
+        if (mainIsland == null)
+        {
+            mainIsland = GameObject.FindGameObjectWithTag("Island").transform;
+        }
+        return mainIsland;
     }
 }

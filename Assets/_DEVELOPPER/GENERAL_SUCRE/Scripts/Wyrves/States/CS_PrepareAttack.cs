@@ -18,7 +18,6 @@ public class CS_PrepareAttack : MonoBehaviour, CS_I_State
         firstQuaternion = parent.transform.rotation * Quaternion.Euler(new Vector3(-parent.AngleRise, 0, 0));
         parent.gizmoDelegate.Add(Gizmo);
         timeStartState = Time.time;
-        Debug.Log("PrepareAttack");
     }
 
     public void State_Update()
@@ -39,7 +38,7 @@ public class CS_PrepareAttack : MonoBehaviour, CS_I_State
     public CS_I_State State_Pass()
     {
         parent.UpdatePlayerDistance();
-        if(parent.DistancePlayer > parent.Height)
+        if((parent.Manager.GetPlayerGameObject().transform.position.y + parent.Height) < parent.transform.position.y )
         {
             return new CS_Pique();
         }
@@ -62,4 +61,10 @@ public class CS_PrepareAttack : MonoBehaviour, CS_I_State
             Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(parent.transform.position, parent.DisctanceTriggerPlayer);
     }
+
+    public new string ToString()
+    {
+        return "Prepare Attack";
+    }
+
 }
